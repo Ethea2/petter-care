@@ -5,6 +5,7 @@ import UserProf from "../../pages/profiles/UserProf"
 import PetProf from "../../pages/profiles/PetProf"
 
 const routes: Array<RouteType> = [
+    // { path: "/", element: <Login /> }, // TODO: Change this when we have a landing page
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/user-profile", element: <UserProf /> },

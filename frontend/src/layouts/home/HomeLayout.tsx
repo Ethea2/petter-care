@@ -1,4 +1,4 @@
-import PageRouter from "../../components/router/PageRouter"
+import PageRouter from "../../components/router/PageRouter.tsx"
 
 const RegisterLayout = () => {
     return (
