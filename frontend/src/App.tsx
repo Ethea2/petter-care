@@ -1,18 +1,20 @@
-import { useState } from "react"
-import reactLogo from "./assets/react.svg"
-import viteLogo from "/vite.svg"
-import "./App.css"
+import { useEffect } from "react"
+import Layout from "./layouts/Layouts"
+import { BrowserRouter as Router } from "react-router-dom";
 
 function App() {
-    const [count, setCount] = useState(0)
 
+    useEffect(() => {
+        const interval = setInterval(() => {
+        }, 10000)
+        return () => clearInterval(interval)
+    }, [])
     return (
-        <>
-            <div className="w-full h-screen flex justify-center items-center">
-                Hello
-            </div>
-        </>
+        <Router>
+            <Layout />
+        </Router>
     )
 }
 
 export default App
+
