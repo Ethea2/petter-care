@@ -10,6 +10,8 @@ Text,
   Button,
 } from '@mantine/core';
 
+import { Link } from 'react-router-dom';
+
 const RegisterForm = () => {
     return (
         <>
@@ -65,7 +67,16 @@ const RegisterForm = () => {
             {/* <Group justify="space-between" mt="lg">
                 <Checkbox label="I agree to the Privacy Policy"/>
             </Group> */}
-            <Button color='blue'>Button</Button>
+
+            {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
+            <div className='mt-14'>
+                <Button variant="outline" color="primary-blue" fullWidth>Button</Button>
+            </div>
+
+            <Group  mt="lg" className='justify-center'>
+                <p className='text-sm'> Have an account?</p>
+                <Link to='/sign-in' className='text-sm font-bold -ml-3 text-primary-blue hover:underline decoration-2 cursor-pointer'>Sign in</Link>
+            </Group>
         </Paper>
         </>
     )
