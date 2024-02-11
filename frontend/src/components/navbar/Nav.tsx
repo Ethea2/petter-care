@@ -9,7 +9,7 @@ const Nav = () => {
                     <img src="/logo.svg" alt="Logo" />
                 </div>
                 <div className="flex items-center w-full h-auto rounded-full bg-input-grey py-2 px-4">
-                    <div className="flex items-center pr-2 text-xl">
+                    <div className="flex items-center pr-2 text-xl ">
                         <PiMagnifyingGlassBold />
                     </div>
                     <input
@@ -19,13 +19,13 @@ const Nav = () => {
                     />
                 </div>
                 <div className="flex items-center px-5 space-x-6 text-3xl text-primary-blue">
-                    <PiHouseFill />
-                    <PiBellFill />
+                    <PiHouseFill className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"/>
+                    <PiBellFill className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out" />
                     <div className="flex items-center space-x-3">
                         <div className="w-10 h-auto">
                             <img src="/user-profile.svg" alt="Profile" />
                         </div>
-                        <AiFillCaretDown />
+                        <AiFillCaretDown className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"/>
                     </div>
                 </div>
             </div>
