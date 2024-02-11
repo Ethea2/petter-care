@@ -14,7 +14,7 @@ const Nav = () => {
                     </div>
                     <input
                         type="text"
-                        className="text-base text-grey placeholder-grey w-full bg-transparent outline-none"
+                        className="text-base text-grey placeholder-grey w-full bg-[#E2E5E6] outline-none"
                         placeholder="Search"
                     />
                 </div>
