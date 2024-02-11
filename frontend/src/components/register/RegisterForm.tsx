@@ -1,14 +1,14 @@
 import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Anchor,
-  Paper,
-  Title,
+    TextInput,
+    PasswordInput,
+    Checkbox,
+    Anchor,
+    Paper,
+    Title,
     Text,
     UnstyledButton,
-  Group,
-  Button,
+    Group,
+    Button,
 } from '@mantine/core';
 
 import { Link } from 'react-router-dom';

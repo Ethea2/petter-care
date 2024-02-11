@@ -7,7 +7,7 @@ const Post = () => {
 
     return (
         <>
-            <div className="bg-dirty-white w-full h-auto rounded-2xl mb-6 mt-2 shadow-md">
+            <div className="bg-white w-auto h-auto rounded-2xl mb-6 mt-2 ml-6 mr-6 shadow-md border-x-indigo-500">
                 <div className="flex items-center pt-6 pb-4 px-6">
                     <div className="pr-6">
                         <div className="w-10 lg:w-12 xl:w-16 h-auto">
@@ -20,6 +20,7 @@ const Post = () => {
                         </p>
                         <p className="text-xs lg:text-base text-grey">@ennxxx</p>
                     </div>
+                    
                     <button className="text-xs ml-auto w-24 p-2 bg-primary-blue font-bold text-dirty-white hover:bg-black rounded-2xl">
                         Follow
                     </button>
@@ -29,14 +30,14 @@ const Post = () => {
                 </div>
                 <div className="flex items-center border-t border-input-grey py-4 px-6">
                     <button
-                        className="text-3xl text-black hover:text-[#E50000] pr-2"
+                        className="text-2xl text-black hover:text-[#E50000] pr-2"
                         onMouseEnter={() => setIsHeart(true)}
                         onMouseLeave={() => setIsHeart(false)}
                     >
                         {isHeart ? <PiHeartStraightFill /> : <PiHeartStraightBold />}
                     </button>
                     <p>16 likes</p>
-                    <button className="text-3xl text-black pl-6 pr-2">
+                    <button className="text-2xl text-black pl-6 pr-2">
                         <PiChatTextBold />
                     </button>
                     <p>2 comments</p>
