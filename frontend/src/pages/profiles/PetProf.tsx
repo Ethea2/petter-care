@@ -1,4 +1,4 @@
-const PetAcc = () => {
+const PetProf = () => {
     return (
         <>
             This is the pet's account.
@@ -6,4 +6,4 @@ const PetAcc = () => {
     )
 }
 
-export default PetAcc
+export default PetProf

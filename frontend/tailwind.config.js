@@ -13,7 +13,8 @@ export default {
                 'dirty-white': '#F4F7F9',
                 'off-white': '#BABABA',
                 'black': '#1E1E1E',
-                'grey': '#404040'
+                'grey': '#404040',
+                'input-grey': '#E2E5E6'
             }
         }
     },

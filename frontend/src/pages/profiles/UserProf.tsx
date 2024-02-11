@@ -1,4 +1,4 @@
-const UserAcc = () => {
+const UserProf = () => {
     return (
         <>
             This is the user's account.
@@ -6,4 +6,4 @@ const UserAcc = () => {
     )
 }
 
-export default UserAcc
+export default UserProf

@@ -5,9 +5,8 @@ import { BrowserRouter as Router } from "react-router-dom";
 import '@mantine/core/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
 
-
 const theme = createTheme({
-  fontFamily: 'Inter, sans-serif'
+    fontFamily: 'Inter, sans-serif'
 });
 
 function App() {
@@ -19,13 +18,13 @@ function App() {
     }, [])
 
     return (
-        
-            <Router>
-                <MantineProvider theme={theme}>
-                    <Layout />
-                </MantineProvider>
-            </Router>
-        
+
+        <Router>
+            <MantineProvider theme={theme}>
+                <Layout />
+            </MantineProvider>
+        </Router>
+
     )
 }
 
