@@ -5,7 +5,7 @@ const Nav = () => {
     return (
         <>
             <div className="flex items-center w-full h-auto bg-dirty-white py-3 drop-shadow-md">
-                <div className="w-60 h-auto pl-4 pr-6">
+                <div className="w-60 h-auto pl-4 pr-6 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out">
                     <img src="/logo.svg" alt="Logo" />
                 </div>
                 <div className="flex items-center w-4/6 min-w-2/6 h-11 rounded-full bg-input-grey p4y-2 px-4">
