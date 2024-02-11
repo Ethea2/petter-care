@@ -1,36 +1,60 @@
 import {
-  TextInput,
-  PasswordInput,
-  Checkbox,
-  Anchor,
-  Paper,
-  Title,
-Text,
-  Group,
-  Button,
+    TextInput,
+    PasswordInput,
+    Anchor,
+    Paper,
+    Title,
+    Text,
+    Group,
+    Button,
 } from '@mantine/core';
+
+import { Checkbox } from '@mantine/core'
 
 const SignInForm = () => {
     return (
         <>
-        <Paper className='h-full p-20 px-40' shadow="md" radius="lg">
+        <Button color='blue'>Button</Button>
+
+        <Paper className='h-full p-20 px-40' shadow="lg" radius="lg">
             <img className='mx-auto pr-4 mb-12 w-2/3 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
             <Text className='text-lg'ta="center">
                 Welcome back!
             </Text>
             <Title className='-m-1 text-3xl' ta="center">
                 Sign in now
-            </Title>
+            </Title> 
 
-            <TextInput className='mt-20' variant='filled' label="User Name" placeholder="Your username" radius="md" required />
-            <PasswordInput variant='filled' label="Password" placeholder="Your password" radius="md" mt="md" required/>
+            <TextInput 
+                className='mt-20' 
+                variant='filled' 
+                label="User Name" 
+                placeholder="Your username" 
+                radius="md" 
+                required 
+                error=''
+                // TODO: Put error message here
+            />
+
+            <PasswordInput 
+                variant='filled' 
+                label="Password" 
+                placeholder="Your password" 
+                radius="md" 
+                mt="md" 
+                required
+                error=''
+                // TODO: Put error message here
+            />
+            
             <Group justify="space-between" mt="lg">
-                <Checkbox label="Remember me"/>
+                <Checkbox label="Remember me" />
                 <Anchor component="button" size="sm">
                     Forgot password?
                 </Anchor>
             </Group>
             <Button color='blue'>Button</Button>
+            
         </Paper>
         </>
     )
