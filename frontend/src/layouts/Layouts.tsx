@@ -8,7 +8,7 @@ const Layout = () => {
     const [noNavbar, setnoNavbar] = useState<Boolean>(false)
     useEffect(() => {
         console.log("Current Path:", location.pathname);
-        if (location.pathname.includes("register") || location.pathname.includes("login")) {
+        if (location.pathname.includes("register") || location.pathname.includes("sign-in")) {
             setnoNavbar(true)
         } else {
             setnoNavbar(false)

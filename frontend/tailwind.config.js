@@ -2,6 +2,9 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
+        colors: {
+            'black': '#1E1E1E'
+        },
         extend: {
             colors: {
                 'primary-blue': '#4265D6',
