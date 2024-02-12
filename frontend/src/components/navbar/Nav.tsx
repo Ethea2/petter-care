@@ -1,5 +1,5 @@
-import { AiFillCaretDown } from "react-icons/ai";
-import { PiMagnifyingGlassBold, PiHouseFill, PiBellFill } from "react-icons/pi";
+import { AiFillCaretDown } from "react-icons/ai"
+import { PiMagnifyingGlassBold, PiHouseFill, PiBellFill } from "react-icons/pi"
 
 const Nav = () => {
     return (
@@ -33,4 +33,4 @@ const Nav = () => {
     )
 }
 
-export default Nav;
+export default Nav

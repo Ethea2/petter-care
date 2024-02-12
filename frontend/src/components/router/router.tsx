@@ -6,12 +6,12 @@ import UserProf from "../../pages/profiles/UserProf"
 import PetProf from "../../pages/profiles/PetProf"
 
 const routes: Array<RouteType> = [
-    { path: "/", element: <Dashboard /> }, 
+    { path: "/", element: <Dashboard /> },
     { path: "/sign-in", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/user-profile", element: <UserProf /> },
-    { path: "/pet-profile", element: <PetProf /> },
+    { path: "/pet-profile", element: <PetProf /> }
 ]
 
 export default routes
