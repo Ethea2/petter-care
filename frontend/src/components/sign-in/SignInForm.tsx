@@ -16,8 +16,8 @@ const SignInForm = () => {
     return (
         <>
 
-        <Paper className='h-full p-20 px-40' shadow="lg" radius="lg">
-            <img className='mx-auto pr-4 mb-12 w-2/3 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
+        <Paper className='p-20 w-[100%] mr-10' shadow="lg" radius="lg">
+            <img className='mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
             <Text className='text-lg' ta="center">
                 Welcome back!
             </Text>
@@ -26,7 +26,7 @@ const SignInForm = () => {
             </Title> 
 
             <TextInput 
-                className='mt-20' 
+                className='mt-14' 
                 variant='filled' 
                 label="User Name" 
                 placeholder="Your username" 
