@@ -9,7 +9,6 @@ const createToken = (_id: mongoose.Types.ObjectId) => {
 
 export const login = async (req: Request, res: Response) => {
     const { username, password } = req.body
-
     try {
         const user = await User.login(username, password)
         const token = createToken(user._id)
@@ -18,7 +17,7 @@ export const login = async (req: Request, res: Response) => {
         })
     } catch (error) {
         const result = error as Error
-        return res.status(400).json({ error: result.message })
+        return res.status(400).json({ message: result.message })
     }
 }
 

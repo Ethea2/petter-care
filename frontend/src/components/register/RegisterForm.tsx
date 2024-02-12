@@ -6,10 +6,39 @@ import {
     TextInput,
     Title
 } from "@mantine/core"
+import { useState } from "react"
 
 import { Link } from "react-router-dom"
+import useRegister from "../../hooks/useRegister"
+import { toast } from "react-toastify"
 
 const RegisterForm = () => {
+    const [username, setUsername] = useState<string>()
+    const [password, setPassowrd] = useState<string>()
+    const [confirm, setConfirm] = useState<string>()
+    const [email, setEmail] = useState<string>()
+    const { register } = useRegister()
+
+    const submit = async () => {
+        if (!email || !username || !password || !confirm) {
+            return toast("Please complete all the necessary fields!", {
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                type: "error"
+            })
+        }
+        if (confirm !== password) {
+            return toast("Please make sure your passwords match!", {
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                type: "error"
+            })
+        }
+        await register(username, password)
+    }
+
     return (
         <>
             <Paper className="h-full p-20 px-40" shadow="lg" radius="lg">
@@ -30,6 +59,7 @@ const RegisterForm = () => {
                     radius="md"
                     required
                     error=""
+                    onChange={(e) => setUsername(e.target.value)}
                     // TODO: Put error message here
                 />
 
@@ -41,6 +71,7 @@ const RegisterForm = () => {
                     mt="md"
                     required
                     error=""
+                    onChange={(e) => setEmail(e.target.value)}
                     // TODO: Put error message here
                 />
 
@@ -52,6 +83,7 @@ const RegisterForm = () => {
                     mt="md"
                     required
                     error=""
+                    onChange={(e) => setPassowrd(e.target.value)}
                     // TODO: Put error message here
                 />
 
@@ -63,6 +95,7 @@ const RegisterForm = () => {
                     mt="md"
                     required
                     error=""
+                    onChange={(e) => setConfirm(e.target.value)}
                     // TODO: Put error message here
                 />
                 {/* <Group justify="space-between" mt="lg">
@@ -71,7 +104,12 @@ const RegisterForm = () => {
 
                 {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <div className="mt-14">
-                    <Button variant="outline" color="primary-blue" fullWidth>
+                    <Button
+                        variant="outline"
+                        color="primary-blue"
+                        onClick={submit}
+                        fullWidth
+                    >
                         Button
                     </Button>
                 </div>
