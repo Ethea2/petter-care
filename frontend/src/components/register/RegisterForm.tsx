@@ -16,14 +16,14 @@ import { Link } from 'react-router-dom';
 const RegisterForm = () => {
     return (
         <>
-        <Paper className='h-full p-20 px-40' shadow="lg" radius="lg">
-            <img className='mx-auto pr-4 mb-12 w-2/3 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
+        <Paper className='ml-10 p-20 w-full' shadow="lg" radius="lg">
+            <img className='mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
             <Title className='-m-1 text-3xl' ta="center">
                 Register your account
             </Title>
             
             <TextInput 
-                className='mt-20' 
+                className='mt-11' 
                 variant='filled' 
                 label="User Name" 
                 placeholder="Your username" 
@@ -65,9 +65,9 @@ const RegisterForm = () => {
                 error=''
                 // TODO: Put error message here
             />
-            {/* <Group justify="space-between" mt="lg">
+            <Group justify="end" mt="lg">
                 <Checkbox label="I agree to the Privacy Policy"/>
-            </Group> */}
+            </Group>
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-14'>
