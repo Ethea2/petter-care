@@ -1,12 +1,13 @@
 import { Types } from "mongoose"
 
 export interface IPets {
-    _id?: Types.ObjectId
+    _id?: Types.ObjectId | string
     name: string
     breed: string
     weight: Number
     birthday: string
-    medicalRecords: IMedicalRecords[]
+    medicalRecords: string | IMedicalRecords | Types.ObjectId
+    picture: string
 }
 
 //temporary medical record field.

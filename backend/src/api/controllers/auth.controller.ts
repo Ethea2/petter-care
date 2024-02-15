@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose"
 import { Request, Response } from "express"
 
-const createToken = (_id: mongoose.Types.ObjectId) => {
+const createToken = (_id: any) => {
     return jwt.sign({ _id }, process.env.SECRET!, { expiresIn: "3w" })
 }
 
