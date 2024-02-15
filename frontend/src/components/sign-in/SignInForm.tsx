@@ -49,7 +49,11 @@ const SignInForm = () => {
             
             <Group justify="space-between" mt="lg">
                 {/* BUG: checkbox label nasa right even if set with prop sa left AAAAAAAAA BOBO MO MANTINE */}
-                <Checkbox label="Remember me" />
+                {/* For now... this is the fix */}
+                <div className='flex'>
+                    <Checkbox className='mr-2'/> 
+                    <p className='text-sm'> I agree to the Privacy Policy </p>
+                </div>
                 <Anchor component="button" size="sm">
                     Forgot password?
                 </Anchor>
@@ -57,11 +61,11 @@ const SignInForm = () => {
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-20'>
-                <Button variant="outline" color="primary-blue" fullWidth>Button</Button>
+                <Button color="primary-blue" fullWidth>Button</Button>
             </div>
 
             <Group  mt="lg" className='justify-center'>
-                <p className='text-sm'> Not a member?</p>
+                <p className='text-sm'>Not a member?</p>
                 <Link to='/register' className='text-sm font-bold -ml-2 text-primary-blue hover:underline decoration-2 cursor-pointer'>Register now</Link>
             </Group>
             

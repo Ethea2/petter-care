@@ -66,12 +66,13 @@ const RegisterForm = () => {
                 // TODO: Put error message here
             />
             <Group justify="end" mt="lg">
-                <Checkbox label="I agree to the Privacy Policy"/>
-            </Group>
+                <Checkbox/> 
+                    <p className='text-sm -ml-1'> I agree to the Privacy Policy </p>
+                </Group>
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-14'>
-                <Button variant="outline" color="primary-blue" fullWidth>Button</Button>
+                <Button color="primary-blue" fullWidth>Button</Button>
             </div>
 
             <Group  mt="lg" className='justify-center'>

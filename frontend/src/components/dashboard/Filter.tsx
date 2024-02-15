@@ -1,26 +1,34 @@
 import { Tabs } from '@mantine/core';
+import Post from './Post.tsx'
+
 
 const Filter = () => {
     return (
         <>
 
-            <Tabs radius="md" defaultValue="foryou" activateTabWithKeyboard>
-
+            <Tabs radius="md" defaultValue="foryou" variant="outline" activateTabWithKeyboard>
                 <Tabs.List className='pt-2 pl-2'>
-                    <Tabs.Tab value="foryou">
-                    <div>For You</div>
+                    <Tabs.Tab value="foryou" className='font-semibold'>
+                        For you
                     </Tabs.Tab>
-                    <Tabs.Tab value="following">
-                    Following
+
+                    <Tabs.Tab value="following" className='font-semibold'>
+                        Following
                     </Tabs.Tab>
                 </Tabs.List>
 
                 <Tabs.Panel value="foryou">
-                   asd
+                    <Post/>
+                    <Post/>
+                    <Post/>
                 </Tabs.Panel>
 
                 <Tabs.Panel value="following">
-                    asd
+                    <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
+                    <Post/>
                 </Tabs.Panel>
 
             </Tabs>
