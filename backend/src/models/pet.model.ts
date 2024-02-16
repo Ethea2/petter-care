@@ -59,7 +59,10 @@ petSchema.static(
         user_id: string
     ) {
         try {
-            const result = await cloudinary.uploader.upload(picturePath)
+            const result = await cloudinary.uploader.upload(picturePath, {
+                use_filename: true,
+                folder: "Petter-Care"
+            })
             const pet = await this.create({
                 name,
                 breed,
@@ -103,13 +106,28 @@ petSchema.static(
         user_id: string
     ) {
         try {
-            const pet = this.create({
+            const pet = await this.create({
                 name,
                 breed,
                 weight,
                 birthday
             })
 
+            const user = await User.findById({ user_id })
+            if (!user) {
+                throw Error("The user does not exist")
+                return
+            }
+
+            if (!pet) {
+                throw Error("The pet upload failed")
+                return
+            }
+
+            if (!pet._id) {
+                throw Error("The pet ID is missing, upload failed")
+                return
+            }
             return pet
         } catch (error) {
             const result = error as Error

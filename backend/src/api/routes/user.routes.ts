@@ -1,5 +1,4 @@
 import express from "express"
-import { Request, Response } from "express"
 import requireAuth from "../middleware/auth.middleware"
 import { getSingleUser, getUsers } from "../controllers/user.controller"
 

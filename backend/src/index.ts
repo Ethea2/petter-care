@@ -5,6 +5,8 @@ import mongoose from "mongoose"
 import userRouter from "./api/routes/user.routes"
 import authRouter from "./api/routes/auth.routes"
 import bcrypt from "bcrypt"
+import postRouter from "./api/routes/post.routes"
+import morgan from "morgan"
 
 dotenv.config()
 
@@ -19,10 +21,14 @@ app.use(
     })
 )
 app.use(express.json())
+app.use(morgan("dev"))
 
+//router setup
 app.use("/api/user", userRouter)
 app.use("/api/auth", authRouter)
+app.use("/api/post", postRouter)
 
+//server initialization
 mongoose.connect(process.env.MONGODB_URI!).then(() => {
     app.listen(port, () => {
         console.log(

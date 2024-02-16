@@ -7,8 +7,8 @@ export interface IUser {
     username: string
     password: string
     pets: any[]
-    posts: Types.ObjectId[] | string[] | IPost[]
-    followers: Types.ObjectId[] | string[] | IUser[]
-    following: Types.ObjectId[] | string[] | IUser[]
+    posts: any[]
+    followers: any[]
+    following: any[]
     picture: string
 }
