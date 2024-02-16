@@ -208,6 +208,7 @@ userSchema.static("getAllUsers", async function getAllUsers() {
         throw Error("Could not fetch the users")
     }
 })
+
 const User = model<IUser, UserModel>("User", userSchema)
 
 export default User

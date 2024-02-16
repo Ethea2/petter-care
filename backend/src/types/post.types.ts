@@ -1,8 +1,9 @@
 export interface IPost {
     title: string
     body: string
-    image: string
+    image?: string
     upvotes: string[]
+    comments: string[]
 }
 
 export interface IComment {
