@@ -1,10 +1,10 @@
 const sinon = require('sinon');
-const userModel = require('../backend/src/models/user.model');
-const authController = require('../backend/src/api/controllers/auth.controllers.ts');
-const userController = require('../backend/src/api/controllers/user.controllers.ts');
+const userModel = require('../backend/src/models/user.model.ts');
+const authController = require('backend/src/api/controllers/auth.controller.ts');
+const userController = require('../backend/src/api/controllers/user.controller.ts');
 const authMiddleWare = require('../backend/src/api/middleware/auth.middleware.ts');
 const { describe, beforeEach, afterEach } = require('node:test');
-const { default: User } = require('../backend/src/models/user.model');
+const { default: User } = require('../backend/src/models/user.model.ts');
 const jwt = require('jsonwebtoken');
 const { error } = require('console');
 
