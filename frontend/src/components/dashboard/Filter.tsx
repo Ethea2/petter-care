@@ -1,37 +1,38 @@
-import { Tabs } from '@mantine/core';
+import { Tabs, Paper } from '@mantine/core';
 import Post from './Post.tsx'
 
 
 const Filter = () => {
     return (
         <>
+            <Paper className='pl-5 pt-5 pb-5' shadow="lg" radius="lg">
+                <Tabs radius="md" defaultValue="foryou" variant="outline" activateTabWithKeyboard>
+                    <Tabs.List className='pt-2 pl-2'>
+                        <Tabs.Tab value="foryou" className='font-semibold'>
+                            For you
+                        </Tabs.Tab>
 
-            <Tabs radius="md" defaultValue="foryou" variant="outline" activateTabWithKeyboard>
-                <Tabs.List className='pt-2 pl-2'>
-                    <Tabs.Tab value="foryou" className='font-semibold'>
-                        For you
-                    </Tabs.Tab>
+                        <Tabs.Tab value="following" className='font-semibold'>
+                            Following
+                        </Tabs.Tab>
+                    </Tabs.List>
 
-                    <Tabs.Tab value="following" className='font-semibold'>
-                        Following
-                    </Tabs.Tab>
-                </Tabs.List>
+                    <Tabs.Panel value="foryou">
+                        <Post/>
+                        <Post/>
+                        <Post/>
+                    </Tabs.Panel>
 
-                <Tabs.Panel value="foryou">
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                </Tabs.Panel>
+                    <Tabs.Panel value="following">
+                        <Post/>
+                        <Post/>
+                        <Post/>
+                        <Post/>
+                        <Post/>
+                    </Tabs.Panel>
 
-                <Tabs.Panel value="following">
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                    <Post/>
-                </Tabs.Panel>
-
-            </Tabs>
+                </Tabs>
+            </Paper>
 
             {/* <div className="flex items-center mb-6">
                 <div className="space-x-6">

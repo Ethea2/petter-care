@@ -1,4 +1,6 @@
-
+import {
+  ActionIcon
+} from '@mantine/core';
 
 import { RichTextEditor, Link } from '@mantine/tiptap';
 import { useEditor } from '@tiptap/react';
@@ -17,7 +19,7 @@ const content = ''
 import {
   Textarea,
 } from '@mantine/core';
-import { PiImageBold, PiArrowCircleRightFill } from "react-icons/pi";
+import { PiImageBold, PiArrowRightBold } from "react-icons/pi";
 
 const CreatePost = () => {
         const editor = useEditor({
@@ -133,9 +135,13 @@ const CreatePost = () => {
             /> */}
 
             <div className="flex space-x-4 text-4xl text-primary-blue">
-                <PiImageBold />
+                <ActionIcon radius='xl' size='xl'>
+                  <PiImageBold size={20}/>
+                </ActionIcon>
                 {/* TODO: Add dropzone */}
-                <PiArrowCircleRightFill />
+                <ActionIcon radius='xl' size='xl'>
+                  <PiArrowRightBold size={20}/>
+                </ActionIcon>
             </div>
         </div>
     );
