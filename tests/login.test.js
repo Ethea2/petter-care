@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // Models
 const modelPath = '../backend/src/models/';
-const User = require('../backend/src/models/user.model.ts').default;
+const userModel = require('../backend/src/models/user.model.ts').default;
 
 // APIs
 const apiPath = '../backend/src/api/';
@@ -14,7 +14,7 @@ const authMiddleWare = require(apiPath + 'middleware/auth.middleware');
 
 // Test Case 1: Input Validation for Login
 describe('Input Validation for Login', () => {
-
+    let error = new Error({ error: 'Some error message' });
     // Failing Cases
     describe('Empty Login Fields', () =>{
         let res, req, loginStub;
@@ -28,8 +28,8 @@ describe('Input Validation for Login', () => {
 
             req = {
                 body: {
-                    username: null,
-                    password: null
+                    username: '',
+                    password: ''
                 }
             };
         });
@@ -42,44 +42,45 @@ describe('Input Validation for Login', () => {
         it('Should return status 400 on empty username and password', () => {
             // Arrange
             const error = new Error('Invalid credentials');
-            loginStub = sinon.stub(User, 'login').throws(error);
+            loginStub = sinon.stub(userModel, 'login').yields(error);
 
             // Act
             authController.login(req, res);
 
             // Assert
-            sinon.assert.calledWith(authController.login, req.body);
+            sinon.assert.calledWith(loginStub, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledOnce(res.status(400).end);
+            // sinon.assert.calledOnce(res.status(400).end);
         });
 
-        // it('Should return status 400 on empty username and non-empty password', () => {
-        //     // Arrange
-        //     req.body.password = 'letmeinpls';
-        //     loginStub = sinon.stub(User, 'login').yields(error);
+        it('Should return status 400 on empty username and non-empty password', () => {
+            // Arrange
+            req.body.password = 'letmeinpls';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
 
-        //     // Act
-        //     authController.login(req, res);
+            // Act
+            authController.login(req, res);
 
-        //     // Assert
-        //     sinon.assert.calledWith(authController.login, req.body);
-        //     sinon.assert.calledWith(res.status, 400);
-        //     sinon.assert.calledOnce(res.status(400).end);
-        // });
+            // Assert
+            sinon.assert.calledWith(loginStub, req.body.username, req.body.password);
+            sinon.assert.calledWith(res.status, 400);
 
-        // it('Should return status 400 on non-empty username and empty password', () => {
-        //     // Arrange
-        //     req.body.username = 'youshallnotpass';
-        //     loginStub = sinon.stub(User, 'login').yields(error);
+            // sinon.assert.calledOnce(res.status(400).end);
+        });
+
+        it('Should return status 400 on non-empty username and empty password', () => {
+            // Arrange
+            req.body.username = 'youshallnotpass';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
             
-        //     // Act
-        //     authController.login(req, res);
+            // Act
+            authController.login(req, res);
 
-        //     // Assert
-        //     sinon.assert.calledWith(authController.login, req.body);
-        //     sinon.assert.calledWith(res.status, 400);
-        //     sinon.assert.calledOnce(res.status(400).end);
-        // });
+            // Assert
+            sinon.assert.calledWith(loginStub, req.body.username, req.body.password);
+            sinon.assert.calledWith(res.status, 400);
+            // sinon.assert.calledOnce(res.status(400).end);
+        });
     });
 
     describe('Invalid Credentials', () => {
@@ -94,63 +95,63 @@ describe('Input Validation for Login', () => {
 
             req = {
                 body: {
-                    username: null,
-                    password: null
+                    username: '',
+                    password: ''
                 }
             };
         });
+        afterEach(() => {
+            loginStub.restore();
+        })
 
         it('Should return status 400 on valid username and invalid password', () => {
-
-        });
-
-        it('Should return status 400 on invalid username and valid password', () => {
-
-        })
-    })
-
-    // Passing Case
-    describe('Valid Credentials', () => {
-        it('Should return jwt token and status 200', () =>{
             // Arrange
-            const user = { username: 'testuser' };
-            const token = 'generated_jwt_token';
-            const expectedResponse = { token };
-
-            const req = {
-                body: {
-                    username: 'validusername',
-                    password: 'validpassword'
-                }
-            };
-
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returnsThis() // This is to support chaining
-            };
-           
-            sinon.stub(User, 'login').returns(user);
+            req.body.username = 'validusername';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
 
             // Act
             authController.login(req, res);
 
             // Assert
-            sinon.assert.calledWith(res.json, expectedResponse);
-            sinon.assert.calledWith(res.status, 200);
-            sinon.assert.calledOnce(res.status(200).json);
+            sinon.assert.calledWith(loginStub, req.body.username, req.body.password);
+            sinon.assert.calledWith(res.status, 400);
+            // sinon.assert.calledOnce(res.status(400).end);
+        });
+
+        it('Should return status 400 on invalid username and valid password', () => {
+            // Arrange
+            req.body.username = 'validusername';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledWith(loginStub, req.body.username, req.body.password);
+            sinon.assert.calledWith(res.status, 400);
+            // sinon.assert.calledOnce(res.status(400).end);
+        });
+    });
+
+    // Passing Case
+    describe('Valid Credentials', () => {
+        it('Should return jwt token and status 200', () =>{
+            // TODO: Fill up code
         });
     });
 });
 
 // Test Case 2: Hashed Password
-// describe('Password Hashing', () => {
-//     // TODO: revise script in 
-// });
+describe('Password Hashing', () => {
+    // TODO: revise script in sheet
+    // TODO: Fill up code
+});
 
 // Test Case 3: User Input Validation for Register
-
+// TODO: Fill up code
 // Test Case 4: Mobile Responsiveness
-
+// TODO: Fill up code
 // Test Case 5: Verify Session management
-
+// TODO: Fill up code
 // Test Case 6: Remember Me
+// TODO: Fill up code

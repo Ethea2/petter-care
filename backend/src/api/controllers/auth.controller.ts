@@ -15,7 +15,7 @@ export const login = async (req: Request, res: Response) => {
         return res.status(200)
     } catch (error) {
         const result = error as Error
-        return res.status(400)
+        return res.status(400).end
     }
 }
 
