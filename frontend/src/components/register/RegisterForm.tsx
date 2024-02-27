@@ -1,10 +1,16 @@
 import {
-    Button,
-    Group,
-    Paper,
-    PasswordInput,
     TextInput,
-    Title
+    PasswordInput,
+    Checkbox,
+    Anchor,
+    Paper,
+    Title,
+    Text,
+    UnstyledButton,
+    Group,
+    Button,
+    PasswordInput,
+    TextInput
 } from "@mantine/core"
 import { useState } from "react"
 

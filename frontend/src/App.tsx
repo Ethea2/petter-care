@@ -5,6 +5,8 @@ import Layout from "./layouts/Layouts"
 
 import "react-toastify/dist/ReactToastify.css"
 
+import '@mantine/tiptap/styles.css';
+
 import { createTheme, MantineProvider } from "@mantine/core"
 import "@mantine/core/styles.css"
 
