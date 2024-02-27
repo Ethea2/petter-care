@@ -1,6 +1,5 @@
 import {
     TextInput,
-    PasswordInput,
     Checkbox,
     Anchor,
     Paper,
@@ -10,7 +9,6 @@ import {
     Group,
     Button,
     PasswordInput,
-    TextInput
 } from "@mantine/core"
 import { useState } from "react"
 

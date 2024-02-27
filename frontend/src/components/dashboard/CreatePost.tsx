@@ -15,10 +15,6 @@ import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 
 const content = ''
-
-import {
-  Textarea,
-} from '@mantine/core';
 import { PiImageBold, PiArrowRightBold } from "react-icons/pi";
 
 const CreatePost = () => {
