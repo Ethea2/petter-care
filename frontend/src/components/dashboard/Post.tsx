@@ -7,7 +7,7 @@ const Post = () => {
 
     return (
         <>
-            <div className="bg-white w-auto h-auto rounded-2xl mb-6 mt-2 ml-6 mr-6 shadow-md border-x-indigo-500">
+            <div className="bg-white w-auto h-auto rounded-2xl mb-6 shadow-md border-x-indigo-500">
                 <div className="flex items-center pt-6 pb-4 px-6">
                     <div className="pr-6">
                         <div className="w-10 lg:w-12 xl:w-16 h-auto">
@@ -20,7 +20,7 @@ const Post = () => {
                         </p>
                         <p className="text-xs lg:text-base text-grey">@ennxxx</p>
                     </div>
-                    
+
                     <button className="text-xs ml-auto w-24 p-2 bg-primary-blue font-bold text-dirty-white hover:bg-black rounded-2xl">
                         Follow
                     </button>
@@ -55,3 +55,4 @@ const Post = () => {
 };
 
 export default Post;
+
