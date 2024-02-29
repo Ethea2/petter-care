@@ -14,7 +14,6 @@ const UserProf = () => {
                     <CreatePost />
                     <ProfileFilter />
                     <Post />
-                    <Post />
                 </div>
             </div>
         </>
