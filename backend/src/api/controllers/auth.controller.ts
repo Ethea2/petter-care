@@ -12,10 +12,10 @@ export const login = async (req: Request, res: Response) => {
     try {
         const user = await User.login(username, password)
         const token = createToken(user._id)
-        return res.status(200)
+        return res.status(200).json({token})
     } catch (error) {
         const result = error as Error
-        return res.status(400).end
+        return res.status(400).json({result}).end
     }
 }
 
@@ -27,6 +27,6 @@ export const signup = async (req: Request, res: Response) => {
         return res.status(200)
     } catch (error) {
         const result = error as Error
-        return res.status(400)
+        return res.status(400).json({result})
     }
 }
