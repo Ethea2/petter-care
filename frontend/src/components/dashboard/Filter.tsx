@@ -8,7 +8,7 @@ const Filter = () => {
             <Tabs color="black" variant="pills" radius="xl" defaultValue="foryou" activateTabWithKeyboard>
                 <Tabs.List className="pr-6">
                     <Tabs.Tab value="foryou" className="font-semibold text-base">
-                        For You
+                        For Ymou
                     </Tabs.Tab>
                     <Tabs.Tab value="following" className="font-semibold text-base">
                         Following
