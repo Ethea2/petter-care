@@ -61,7 +61,7 @@ const SignInForm = () => {
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-20'>
-                <Button color="primary-blue" fullWidth>Button</Button>
+                <Button className='duration-300 ease-in-out rounded-2xl' color="primary-blue" fullWidth>Button</Button>
             </div>
 
             <Group  mt="lg" className='justify-center'>

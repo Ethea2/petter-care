@@ -1,5 +1,11 @@
+import {
+  Paper, 
+  Button,
+} from '@mantine/core';
 import { useState } from "react";
 import { PiHeartStraightBold, PiHeartStraightFill, PiChatTextBold, PiBookmarkSimpleBold, PiBookmarkSimpleFill } from "react-icons/pi";
+
+import { Link } from 'react-router-dom';
 
 const Post = () => {
     const [isHeart, setIsHeart] = useState(false);
@@ -7,49 +13,61 @@ const Post = () => {
 
     return (
         <>
-            <div className="bg-white w-auto h-auto rounded-2xl mt-6 shadow-md border-x-indigo-500">
-                <div className="flex items-center pt-6 pb-4 px-6">
-                    <div className="pr-6">
-                        <div className="w-10 lg:w-12 xl:w-16 h-auto">
-                            <img src="/user-profile.svg" alt="Profile" />
+            {/* TODO: Darken on hover */}
+            <Link to='/post'>
+                <Paper className="bg-white w-auto h-auto rounded-2xl mt-6 shadow-md hover:cursor-pointer hover:bg-white-darken transition duration-300 ease-in-out">
+                    <div className="flex items-center pt-6 pb-4 px-6">
+
+                        <div className="pr-6">
+                            <div className="w-10 lg:w-12 xl:w-16 h-auto">
+                                <img src="/user-profile.svg" alt="Profile" />
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <p className="text-base lg:text-lg text-black font-bold">
-                            Paula Pacheco
-                        </p>
-                        <p className="text-xs lg:text-base text-grey">@ennxxx</p>
+
+                        <div>
+                            <Link to='user-profile' className="text-base lg:text-lg text-black font-bold hover:underline hover:cursor-pointer">
+                                Paula Pacheco
+                            </Link>
+                            <p className="text-xs lg:text-base text-grey">@ennxxx</p>
+                        </div>
+
+                        <Button className="ml-auto hover:bg-black rounded-2xl duration-300 ease-in-out">
+                            Follow
+                        </Button>
+
                     </div>
 
-                    <button className="text-xs ml-auto w-24 p-2 bg-primary-blue font-bold text-dirty-white hover:bg-black rounded-2xl">
-                        Follow
-                    </button>
-                </div>
-                <div className="px-6 pb-4">
-                    <p>I'd sacrifice myself for a cat.</p>
-                </div>
-                <div className="flex items-center border-t border-input-grey py-4 px-6">
-                    <button
-                        className="text-2xl text-black hover:text-[#E50000] pr-2"
-                        onMouseEnter={() => setIsHeart(true)}
-                        onMouseLeave={() => setIsHeart(false)}
-                    >
-                        {isHeart ? <PiHeartStraightFill /> : <PiHeartStraightBold />}
-                    </button>
-                    <p>16 likes</p>
-                    <button className="text-2xl text-black pl-6 pr-2">
-                        <PiChatTextBold />
-                    </button>
-                    <p>2 comments</p>
-                    <button
-                        className="text-3xl text-black hover:text-[#EFBE69] pr-2 ml-auto"
-                        onMouseEnter={() => setIsBookmark(true)}
-                        onMouseLeave={() => setIsBookmark(false)}
-                    >
-                        {isBookmark ? <PiBookmarkSimpleFill /> : <PiBookmarkSimpleBold />}
-                    </button>
-                </div>
-            </div>
+                    <div className="px-6 pb-4">
+                        <p>I'd sacrifice myself for a cat.</p>
+                    </div>
+
+                    <div className="flex items-center border-t border-input-grey py-4 px-6">
+                        <button
+                            className="text-2xl text-black hover:text-[#E50000] pr-2 duration-300 ease-in-out"
+                            onMouseEnter={() => setIsHeart(true)}
+                            onMouseLeave={() => setIsHeart(false)}
+                        >
+                            {isHeart ? <PiHeartStraightFill /> : <PiHeartStraightBold />}
+                        </button>
+
+                        <p className='pt-1'>16</p>
+
+                        <button className="text-2xl text-black pl-6 pr-2">
+                            <PiChatTextBold />
+                        </button>
+                        <p className='pt-1'>2</p>
+
+                        <button
+                            className="text-3xl text-black hover:text-[#EFBE69] pr-2 ml-auto duration-300 ease-in-out"
+                            onMouseEnter={() => setIsBookmark(true)}
+                            onMouseLeave={() => setIsBookmark(false)}
+                        >
+                            {isBookmark ? <PiBookmarkSimpleFill /> : <PiBookmarkSimpleBold />}
+                        </button>
+                    </div>
+
+                </Paper>
+            </Link>
         </>
     );
 };

@@ -72,7 +72,7 @@ const RegisterForm = () => {
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-14'>
-                <Button color="primary-blue" fullWidth>Button</Button>
+                <Button className='rounded-2xl duration-300 ease-in-out' color="primary-blue" fullWidth>Button</Button>
             </div>
 
             <Group  mt="lg" className='justify-center'>

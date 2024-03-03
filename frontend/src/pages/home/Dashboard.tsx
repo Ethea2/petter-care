@@ -31,9 +31,7 @@ const Dashboard = () => {
 
                 <div className="lg:w-[75%] xl:w-[70%] 2xl:w-[80%] pl-12">
                     <CreatePost />
-                    <div>
-                        <Filter />
-                    </div>
+                    <Filter />
                 </div>
             </div >
         </>
