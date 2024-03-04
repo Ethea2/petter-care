@@ -24,6 +24,9 @@ const Filter = () => {
                 <Tabs.Panel value="following">
                     <Post />
                     <Post />
+                    <Post />
+                    <Post />
+                    <Post />
 
                 </Tabs.Panel>
 

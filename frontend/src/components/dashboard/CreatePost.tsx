@@ -2,8 +2,6 @@ import {
   ActionIcon, 
   Button,
   FileButton,
-  Group, 
-  Text
 } from '@mantine/core';
 
 import { useState } from 'react';
@@ -21,7 +19,7 @@ import { Color } from '@tiptap/extension-color';
 import TextStyle from '@tiptap/extension-text-style';
 import Placeholder from '@tiptap/extension-placeholder';
 
-import { PiImageBold, PiArrowRightBold } from "react-icons/pi";
+import { PiImageBold } from "react-icons/pi";
 
 const content = ''
 
@@ -46,15 +44,18 @@ const CreatePost = () => {
 
   return (
     <div className="bg-white w-full h-auto rounded-2xl p-6 mb-8 shadow-md">
-      <div className='flex space-x-6'>
-        <div>
-          <div className="w-10 lg:w-12 xl:w-16 h-auto">
-            <img src="/user-profile.svg" alt="Profile" />
-          </div>
-        </div>
+
+      <div className='flex justify-between'>
 
         <div>
-          <RichTextEditor className="w-full pt-1" editor={editor}>
+          <div className="lg:w-12 xl:w-16">
+            <img src="/user-profile.svg" alt="Profile" />
+          </div>
+
+        </div>
+
+        <div className="w-full pl-6">
+          <RichTextEditor editor={editor}>
             <RichTextEditor.Toolbar sticky stickyOffset={60}>
               <RichTextEditor.ColorPicker
                 colors={[

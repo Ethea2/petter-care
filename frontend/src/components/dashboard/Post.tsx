@@ -15,7 +15,7 @@ const Post = () => {
         <>
             {/* TODO: Darken on hover */}
             <Link to='/post'>
-                <Paper className="bg-white w-auto h-auto rounded-2xl mt-6 shadow-md hover:cursor-pointer hover:bg-white-darken transition duration-300 ease-in-out">
+                <Paper className="bg-white w-auto h-auto rounded-2xl mt-6 shadow-md hover:cursor-pointer hover:brightness-95 transition duration-300 ease-in-out">
                     <div className="flex items-center pt-6 pb-4 px-6">
 
                         <div className="pr-6">
