@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import { Request, Response } from "express"
 
 export const createToken = (_id: mongoose.Types.ObjectId) => {
+    console.log( process.env.SECRET!)
     let returnVar = jwt.sign({ _id }, process.env.SECRET!, { expiresIn: "3w" })
     return returnVar
 }
@@ -13,10 +14,16 @@ export const login = async (req: Request, res: Response) => {
     try {
         const user = await User.login(username, password)
         const token = createToken(user._id);
-        return res.status(200);
+        console.log('wassup');
+        console.log(token);
+        return res.status(200).json({
+            token
+        });
     } catch (error) {
         const result = error as Error
-        return res.status(400);
+        return res.status(400).json({
+            message: result.message
+        });
     }
 }
 
@@ -28,6 +35,8 @@ export const signup = async (req: Request, res: Response) => {
         return res.status(200);
     } catch (error) {
         const result = error as Error
-        return res.status(400);
+        return res.status(400).json({
+            message: result.message
+        });
     }
 }
