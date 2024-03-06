@@ -6,11 +6,12 @@ import { IconSearch, IconArrowRight, IconLogout, IconSettings, IconMessageCircle
 
 
 import UserButton from "./UserButton";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
     return (
         <>
-            <div className="flex items-center w-full h-auto bg-dirty-white py-3 drop-shadow-md relative z-50 justify-between">
+            <div className="sticky top-0 flex items-center w-full h-auto bg-dirty-white py-3 drop-shadow-md relative z-50 justify-between">
 
                 {/* Logo and Search*/}
                 <div className='flex w-95'>
@@ -42,14 +43,17 @@ const Nav = () => {
                         <PiHouseFill className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out" />
                         <PiBellFill className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out" />
 
-                        <div className="flex items-center hover:brightness-75 transition duration-400 ease-in-out mt-1">
+                        <div className="flex items-center -mt-2">
                             <Menu trigger="hover" position="bottom-end">
                                 <Menu.Target>
 
-                                    <UserButton
-                                    image="../../../public/user-profile.svg"
-                                    name="Paula"
-                                    username="ennxxx"/>
+                                    <Link to='/user-profile'>
+                                        <UserButton
+                                        className="hover:brightness-75    "
+                                        image="../../../public/user-profile.svg"
+                                        name="Paula"
+                                        username="ennxxx"/>
+                                    </Link>
                                     
                                 </Menu.Target>
                                 
