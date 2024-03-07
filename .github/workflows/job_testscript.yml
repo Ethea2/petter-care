@@ -28,9 +28,10 @@ jobs:
         working-directory: ./backend
 
       - name: Run tests and capture output
-      run: |
-        # Redirect test output with timestamps and color codes
-        npm test 2>&1 | tr -d '\r' | sed 's/^/$(date +"%Y-%m-%d %H:%M:%S") /' > test_results.txt
+      # Redirect test output with timestamps and color codes
+      run: npm test 2>&1 | tr -d '\r' | sed 's/^/$(date +"%Y-%m-%d %H:%M:%S") /' > test_results.txt
+        
+        
 
       - name: Upload test results (optional)
         uses: actions/upload-artifact@v2
