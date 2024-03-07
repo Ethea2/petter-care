@@ -3,6 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import Layout from "./layouts/Layouts"
 
+import { useState } from "react"
+// import reactLogo from "./assets/react.svg"
+// import viteLogo from "/vite.svg"
+import "./App.css"
+
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
 import { createTheme, MantineProvider } from '@mantine/core';
@@ -122,6 +127,12 @@ function App() {
         return () => clearInterval(interval)
     }, [])
 
+
+/* if anything messes up please look at the code below
+function App() {
+//     const [count, setCount] = useState(0)
+
+
     return (
         <Router>
             <ToastContainer
@@ -142,5 +153,5 @@ function App() {
         </Router>
     )
 }
-
+*/
 export default App
