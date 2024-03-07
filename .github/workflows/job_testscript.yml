@@ -29,7 +29,7 @@ jobs:
 
       - name: Run tests and capture output
       # Redirect test output with timestamps and color codes
-      run: npm test 2>&1 | tr -d '\r' | sed 's/^/$(date +"%Y-%m-%d %H:%M:%S") /' > test_results.txt
+        run: npm test 2>&1 | tr -d '\r' | sed 's/^/$(date +"%Y-%m-%d %H:%M:%S") /' > test_results.txt
         
         
 
