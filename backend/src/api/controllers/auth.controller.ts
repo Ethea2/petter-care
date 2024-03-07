@@ -4,18 +4,15 @@ import mongoose from "mongoose"
 import { Request, Response } from "express"
 
 export const createToken = (_id: mongoose.Types.ObjectId) => {
-    console.log( process.env.SECRET!)
     let returnVar = jwt.sign({ _id }, process.env.SECRET!, { expiresIn: "3w" })
     return returnVar
 }
 
 export const login = async (req: Request, res: Response) => {
-    const { username, password } = req.body
+    const { username, password } = req.body;
     try {
-        const user = await User.login(username, password)
+        const user = await User.login(username, password);
         const token = createToken(user._id);
-        console.log('wassup');
-        console.log(token);
         return res.status(200).json({
             token
         });
@@ -24,11 +21,11 @@ export const login = async (req: Request, res: Response) => {
         return res.status(400).json({
             message: result.message
         });
-    }
-}
+    };
+};
 
 export const signup = async (req: Request, res: Response) => {
-    const { username, password } = req.body
+    const { username, password } = req.body;
 
     try {
         const user = await User.signup(username, password)
@@ -38,5 +35,5 @@ export const signup = async (req: Request, res: Response) => {
         return res.status(400).json({
             message: result.message
         });
-    }
-}
+    };
+};

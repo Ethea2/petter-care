@@ -3,6 +3,7 @@ const sinon = require('sinon');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const Sinon = require('sinon');
+const { default: mongoose } = require('mongoose');
 
 // Models
 const modelPath = '../backend/src/models/';
@@ -13,7 +14,7 @@ const apiPath = '../backend/src/api/';
 const authController = require(apiPath + 'controllers/auth.controller');
 const userController = require(apiPath + 'controllers/user.controller');
 const authMiddleWare = require(apiPath + 'middleware/auth.middleware');
-
+ 
 // Test Case 1: Input Validation for Login
 describe('Input Validation for Login Auth Controller', () => {
     let error = new Error({ error: 'Some error message' });
@@ -26,8 +27,7 @@ describe('Input Validation for Login Auth Controller', () => {
             res = {
                 json: sinon.spy(),
                 status: sinon.stub().returns({
-                    json: sinon.spy(),
-                    end: sinon.spy()
+                    json: sinon.spy()
                 })
             };
 
@@ -49,6 +49,7 @@ describe('Input Validation for Login Auth Controller', () => {
             // Arrange
             loginStub = sinon.stub(userModel, 'login').yields(error);
             authLoginSpy = sinon.spy(authController, 'login');
+
             // Act
             authController.login(req, res);
 
@@ -61,10 +62,12 @@ describe('Input Validation for Login Auth Controller', () => {
         });
 
         it('Should return status 400 on empty username and non-empty password', () => {
+            
             // Arrange
             req.body.password = 'letmeinpls';
             loginStub = sinon.stub(userModel, 'login').yields(error);
             authLoginSpy = sinon.spy(authController, 'login');
+
             // Act
             authController.login(req, res);
 
@@ -77,10 +80,12 @@ describe('Input Validation for Login Auth Controller', () => {
         });
 
         it('Should return status 400 on non-empty username and empty password', () => {
+            
             // Arrange
             req.body.username = 'youshallnotpass';
             loginStub = sinon.stub(userModel, 'login').yields(error);
             authLoginSpy = sinon.spy(authController, 'login');
+            
             // Act
             authController.login(req, res);
 
@@ -90,7 +95,6 @@ describe('Input Validation for Login Auth Controller', () => {
             sinon.assert.calledWith(authController.login, req, res);
             sinon.assert.calledOnce(res.status.withArgs(400));
             sinon.assert.calledWith(res.status, 400);
-            
         });
     });
 
@@ -118,10 +122,12 @@ describe('Input Validation for Login Auth Controller', () => {
         })
 
         it('Should return status 400 on valid username and invalid password', () => {
+            
             // Arrange
             req.body.username = 'validusername';
             loginStub = sinon.stub(userModel, 'login').yields(error);
             authLoginSpy = sinon.spy(authController, 'login');
+            
             // Act
             authController.login(req, res);
 
@@ -134,10 +140,12 @@ describe('Input Validation for Login Auth Controller', () => {
         });
 
         it('Should return status 400 on invalid username and valid password', () => {
+            
             // Arrange
             req.body.password = 'validpassword';
             loginStub = sinon.stub(userModel, 'login').yields(error);
             authLoginSpy = sinon.spy(authController, 'login');
+            
             // Act
             authController.login(req, res);
 
@@ -156,41 +164,35 @@ describe('Input Validation for Login Auth Controller', () => {
         
         beforeEach(() => {
             // Reset stubs and objects before each test
-            res = {
-                status: sinon.stub().returns({
-                    json: sinon.spy(),
-                    end: sinon.spy()
-                })
+            res = { 
+                status: sinon.stub().returnsThis(),
+                json: sinon.spy()
             };
     
             req = {
                 body: {
+                    _id: "12345",
                     username: 'testusername',
                     password: 'testpassword'
                 }
             };
         });
         // TODO: fix this
-        it('Should return jwt token and status 200', async() =>{
+        it('Should return jwt token and status 200', async () =>{
+
             // Arrange
-            const mockUser = {
-                _id: 'someid',
-                username: 'testusername',
-                password: 'testpassword'
-            };
-    
-            
-            loginStub = sinon.stub(userModel, 'login').resolves(mockUser);
+            loginStub = sinon.stub(userModel, 'login').resolves(req.body);
             authLoginSpy = sinon.spy(authController, 'login');
+            
+            // Act
+            await authController.login(req, res);
 
-
-            authController.login(req, res);
-
-            sinon.assert.calledOnce(authController.login);
+            // Assert
             sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authLoginSpy);
+            sinon.assert.calledOnce(authController.login);
             sinon.assert.calledWith(authController.login, req, res);
-            sinon.assert.calledOnce(res.status);
-
+            sinon.assert.calledWith(res.status, 200);
         });
     });
 });
@@ -219,9 +221,13 @@ describe('Password Hashing',  () => {
             }
         };
     });
+
     afterEach(()=>{
         authSignupStub.restore();
-    })
+        signupStub.restore();
+        createStub.restore();
+    });
+
     it('Should return hashed password', async() =>{
         // Arrange
         authSignupStub = sinon.stub(authController, 'signup').yields(200);
@@ -239,17 +245,17 @@ describe('Password Hashing',  () => {
         sinon.assert.calledWith(signupStub, req.body.username, req.body.password);
         sinon.assert.match(result, { username: 'testusername'});
         expect(result.password != req.body.password);
-        createStub.restore();
     });
     
     
     it('Should return status 200', async() => {
-        signupStub.restore();
         // Arrange
         signupStub = sinon.stub(userModel, 'signup').resolves(mockUser);
-        // Act
         authSignupSpy = sinon.spy(authController, 'signup');
+        
+        // Act
         await authController.signup(req, res);
+        
         // Assert
         sinon.assert.calledOnce(signupStub);
         sinon.assert.calledOnce(authSignupSpy);
@@ -257,7 +263,7 @@ describe('Password Hashing',  () => {
         sinon.assert.calledWith(authController.signup, req, res);
         sinon.assert.calledOnce(res.status.withArgs(200));
         sinon.assert.calledWith(res.status, 200);
-        signupStub.restore();
+      
     })
 });
 
@@ -290,6 +296,7 @@ describe('Input Validation for Register', () =>{
         })
 
         it('Should return 400 on empty fields', () => {
+            
             // Arrange
             req = {
                 body: {
@@ -304,6 +311,7 @@ describe('Input Validation for Register', () =>{
           
             // Act
             authController.signup(req, res);
+
             // Assert
             sinon.assert.calledOnce(signupStub);
             sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
@@ -313,11 +321,12 @@ describe('Input Validation for Register', () =>{
         it('Should return status 400 on empty username', () => {
             // Arrange
             req.body.username = '';
-            signupStub = sinon.stub(userModel, 'signup').yields(error);;
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
            
 
             // Act
             authController.signup(req, res);
+
             // Assert
             sinon.assert.calledOnce(signupStub);
             sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
@@ -325,6 +334,7 @@ describe('Input Validation for Register', () =>{
         });
 
         it('should return status 400 on empty password', () => {
+            // Arrange
             req.body.password = '';
             signupStub = sinon.stub(userModel, 'signup').yields(error);
             
@@ -336,8 +346,9 @@ describe('Input Validation for Register', () =>{
             sinon.assert.calledWith(res.status, 400);
         });
 
-        // TODO: this should fail but it passes
+      
         it('should return status 400 on empty email', () => {
+            // Arrange
             req.body.email = '';
 
             signupStub = sinon.stub(userModel, 'signup').yields(error);
@@ -349,12 +360,12 @@ describe('Input Validation for Register', () =>{
             sinon.assert.calledWith(res.status, 400);
         });
 
-        // TODO: this should fail but it passes
+        
         it('should return status 400 on empty confirmPassword', () => {
+            // Arrange
             req.body.confirmPassword = '';
-
-
             signupStub = sinon.stub(userModel, 'signup').yields(error);
+            
             // Act
             authController.signup(req, res);
 
@@ -364,8 +375,9 @@ describe('Input Validation for Register', () =>{
             sinon.assert.calledWith(res.status, 400);
         });
 
-        // TODO: this should fail but it passes
+       
         it('should return status 400 on mismatched passwords', () => {
+            
             // Arrange
             req.body.confirmPassword = 'imnotlikeotherpasswords';
             signupStub = sinon.stub(userModel, 'signup').yields(error) 
@@ -408,6 +420,7 @@ describe('Input Validation for Register', () =>{
         });
 
         it('Should return status 400 when username contains special characters', () =>{
+            
             // Arrange
             signupStub = sinon.stub(userModel, 'signup').yields(error);
             authSignupSpy = sinon.spy(authController, 'signup');
@@ -426,6 +439,7 @@ describe('Input Validation for Register', () =>{
         });
 
         it('Should return status 400 when email contains special characters except @', () =>{          
+            
             // Arrange
             signupStub = sinon.stub(userModel, 'signup').yields(error);
             authSignupSpy = sinon.spy(authController, 'signup');
@@ -445,12 +459,13 @@ describe('Input Validation for Register', () =>{
         });
 
         it('Should return status 400 when password contains special characters', () => {
+            
             // Arrange
             signupStub = sinon.stub(userModel, 'signup').yields(error);
             authSignupSpy = sinon.spy(authController, 'signup');
             req.body.password = 'testpassword😎123';
             
-
+            // Act
             authController.signup(req, res);
 
             // Assert
@@ -463,11 +478,11 @@ describe('Input Validation for Register', () =>{
         });
 
         it('Should return status 400 when confirm password contains special characters', () => {
+            
             // Arrange
             signupStub = sinon.stub(userModel, 'signup').yields(error);
             authSignupSpy = sinon.spy(authController, 'signup');
             req.body.confirmPassword = 'testpa😒😒word';
-
 
             // Act
             authController.signup(req, res);
@@ -480,7 +495,7 @@ describe('Input Validation for Register', () =>{
             sinon.assert.calledWith(res.status, 400);
         });
         
-    })
+    });
 });
 // Test Case 4: Verify Session management
 // TODO: Fill up code
