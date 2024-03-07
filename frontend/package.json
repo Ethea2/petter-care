@@ -30,7 +30,7 @@
     "@tiptap/extension-underline": "^2.2.2",
     "@tiptap/pm": "^2.2.2",
     "@tiptap/react": "^2.2.2",
-    "@tiptap/starter-kit": "^2.2.2",.0",
+    "@tiptap/starter-kit": "^2.2.2",
     "framer-motion": "^11.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
