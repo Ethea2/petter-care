@@ -28,20 +28,14 @@ jobs:
         working-directory: ./backend
 
       - name: Run tests and capture output
-        run: npm test > tests/test_results.txt 2>&1
-
-      - name: Print test results (PowerShell)
-        run: |
-          $contents = Get-Content 'tests\test_results.txt'
-          Write-Output $contents
-
-      - name: Upload test results (optional)
+        run: npm test 2>&1 | tee test_results.txt | tr -d '\r'
+     
+       - name: Upload test results
         uses: actions/upload-artifact@v2
         with:
           name: test_results
-          path: tests\test_results.txt
+          path: test_results.txt
           if: always()  # Upload even on failure
-
 
 
       
