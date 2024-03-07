@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { PiHouseFill, PiBellFill } from "react-icons/pi";
 import { TextInput, ActionIcon, rem, Menu} from '@mantine/core';
   
 import { IconSearch, IconArrowRight, IconLogout, IconSettings, IconMessageCircle} from '@tabler/icons-react';
