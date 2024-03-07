@@ -27,11 +27,17 @@ jobs:
         run: npm install
         working-directory: ./backend
 
-      - name: Run tests
-        run: npm test
+      - name: Run tests and capture output
+      run: |
+        # Redirect test output with timestamps and color codes
+        npm test 2>&1 | tr -d '\r' | sed 's/^/$(date +"%Y-%m-%d %H:%M:%S") /' > test_results.txt
 
-      - name: Save test results
+      - name: Upload test results (optional)
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: coverage
+          name: test_results
+          path: test_results.txt
+          if: always()  # Upload even on failure
+
+
+      
