@@ -1,12 +1,10 @@
 import { useRef } from "react"
 import { useNavigate } from "react-router"
 import { Id, toast } from "react-toastify"
-import { useAuth } from "./useAuth"
 
 const useRegister = () => {
     const toastID = useRef<Id>()
     const router = useNavigate()
-    const { dispatch } = useAuth()
 
     const register = async (
         username: string | undefined,

@@ -1,19 +1,17 @@
 import { ActionIcon, Button, FileButton } from "@mantine/core"
 
-import { useState } from "react"
-
-import { RichTextEditor, Link } from "@mantine/tiptap"
-import { useEditor } from "@tiptap/react"
-import Highlight from "@tiptap/extension-highlight"
-import StarterKit from "@tiptap/starter-kit"
-import Underline from "@tiptap/extension-underline"
-import TextAlign from "@tiptap/extension-text-align"
-import Superscript from "@tiptap/extension-superscript"
-import SubScript from "@tiptap/extension-subscript"
+import { Link, RichTextEditor } from "@mantine/tiptap"
 import { IconColorPicker } from "@tabler/icons-react"
 import { Color } from "@tiptap/extension-color"
-import TextStyle from "@tiptap/extension-text-style"
+import Highlight from "@tiptap/extension-highlight"
 import Placeholder from "@tiptap/extension-placeholder"
+import SubScript from "@tiptap/extension-subscript"
+import Superscript from "@tiptap/extension-superscript"
+import TextAlign from "@tiptap/extension-text-align"
+import TextStyle from "@tiptap/extension-text-style"
+import Underline from "@tiptap/extension-underline"
+import { useEditor } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
 
 import { PiImageBold } from "react-icons/pi"
 
@@ -35,6 +33,10 @@ const CreatePost = () => {
         ],
         content
     })
+
+    const setFile = () => {
+        return null
+    }
 
     return (
         <div className="bg-white w-full h-auto rounded-2xl p-6 mb-8 shadow-md">
@@ -129,8 +131,8 @@ const CreatePost = () => {
                     <div className="flex flex-row text-primary-blue justify-between items-end">
                         <div className="-mb-1">
                             <FileButton
-                                onChange={setFile}
                                 accept="image/png,image/jpeg"
+                                onChange={setFile}
                             >
                                 {(props) => (
                                     <ActionIcon
