@@ -7,6 +7,8 @@ import { IconSearch, IconArrowRight, IconLogout, IconSettings, IconMessageCircle
 
 import UserButton from "./UserButton";
 import { Link } from "react-router-dom";
+import { AiFillCaretDown } from "react-icons/ai"
+import { PiMagnifyingGlassBold, PiHouseFill, PiBellFill } from "react-icons/pi"
 
 const Nav = () => {
     return (
@@ -84,3 +86,4 @@ const Nav = () => {
 }
 
 export default Nav;
+
