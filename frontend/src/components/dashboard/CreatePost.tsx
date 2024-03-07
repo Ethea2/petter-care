@@ -40,7 +40,7 @@ const CreatePost = () => {
     content,
   });
 
-  const [file, setFile] = useState<File | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
 
   return (
     <div className="bg-white w-full h-auto rounded-2xl p-6 mb-8 shadow-md">
