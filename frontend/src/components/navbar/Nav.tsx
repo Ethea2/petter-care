@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { PiHouseFill, PiBellFill } from "react-icons/pi";
 import { TextInput, ActionIcon, rem, Menu} from '@mantine/core';
   
 import { IconSearch, IconArrowRight, IconLogout, IconSettings, IconMessageCircle} from '@tabler/icons-react';
@@ -7,6 +6,8 @@ import { IconSearch, IconArrowRight, IconLogout, IconSettings, IconMessageCircle
 
 import UserButton from "./UserButton";
 import { Link } from "react-router-dom";
+import { AiFillCaretDown } from "react-icons/ai"
+import { PiMagnifyingGlassBold, PiHouseFill, PiBellFill } from "react-icons/pi"
 
 const Nav = () => {
     return (
@@ -84,3 +85,4 @@ const Nav = () => {
 }
 
 export default Nav;
+

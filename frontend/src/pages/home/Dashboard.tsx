@@ -1,12 +1,22 @@
 import {
     Paper
 } from '@mantine/core';
-
-import Follow from '../../components/dashboard/Follow.tsx'
-import CreatePost from '../../components/dashboard/CreatePost.tsx'
-import Filter from '../../components/dashboard/Filter.tsx'
+import Follow from "../../components/dashboard/Follow.tsx"
+import CreatePost from "../../components/dashboard/CreatePost.tsx"
+import Filter from "../../components/dashboard/Filter.tsx"
+import Post from "../../components/dashboard/Post.tsx"
+import { useEffect } from "react"
+import { useAuth } from "../../hooks/useAuth.tsx"
+import { useNavigate } from "react-router"
 
 const Dashboard = () => {
+    const router = useNavigate()
+    const { user } = useAuth()
+    useEffect(() => {
+        if (!user) {
+            router("/sign-in")
+        }
+    }, [])
     return (
         <>
             <div className="flex px-40 py-10 bg-dirty-white text-black">
@@ -33,7 +43,7 @@ const Dashboard = () => {
                     <CreatePost />
                     <Filter />
                 </div>
-            </div >
+            </div>
         </>
     )
 }
