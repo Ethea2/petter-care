@@ -3,10 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import Layout from "./layouts/Layouts"
 
+import '@mantine/core/styles.css';
+import '@mantine/tiptap/styles.css';
+import { createTheme, MantineProvider } from '@mantine/core';
 import "react-toastify/dist/ReactToastify.css"
 
-import { createTheme, MantineProvider } from "@mantine/core"
-import "@mantine/core/styles.css"
 
 const theme = createTheme({
     fontFamily: "Inter, sans-serif",
@@ -98,6 +99,19 @@ const theme = createTheme({
             "#717171",
             "#656565",
             "#575757"
+            ],
+        'white-darken': [
+            "#fbf3f5",
+            "#e7e7e7",
+            "#cdcdcd",
+            "#b2b2b2",
+            "#9a9a9a",
+            "#8b8b8b",
+            "#848484",
+            "#717171",
+            "#656565",
+            "#5c5557"
+
         ]
     }
 })
