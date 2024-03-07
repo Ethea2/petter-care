@@ -19,6 +19,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install dependencies in frontend
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Install dependencies in backend
+        run: npm install
+        working-directory: ./backend
+
       - name: Run tests
         run: npm test
 
