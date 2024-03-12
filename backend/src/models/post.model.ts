@@ -3,6 +3,16 @@ import cloudinary from "../utils/cloudinary"
 import { IPost } from "../types/post.types"
 import User from "./user.model"
 
+// interface PostModel extends Model<IPost> {
+//     addPost(_id: string, title: string, body: string): IPost
+//     addPostWithPicture(
+//         _id: string,
+//         title: string,
+//         body: string,
+//         picturePath: string
+//     ): IPost
+// }
+
 interface PostModel extends Model<IPost> {
     addPost(_id: string, title: string, body: string): IPost
     addPostWithPicture(
@@ -11,6 +21,7 @@ interface PostModel extends Model<IPost> {
         body: string,
         picturePath: string
     ): IPost
+    createPost(_id: string, title: string, body: string, picturePath?: string): Promise<IPost>
 }
 
 export const postSchema = new Schema<IPost, PostModel>({
@@ -36,6 +47,72 @@ export const postSchema = new Schema<IPost, PostModel>({
         }
     ]
 })
+
+// additional:
+postSchema.static(
+    "createPost",
+    async function createPost(
+        _id: string,
+        title: string,
+        body: string,
+        picturePath?: string
+    ) {
+        try {
+            if (picturePath) {
+                const result = await cloudinary.uploader.upload(picturePath, {
+                    use_filename: true,
+                    folder: "Petter-Care"
+                })
+                if (!result) {
+                    throw Error("Upload failed!")
+                }
+
+                const post = await this.create({
+                    title,
+                    body,
+                    image: result.secure_url
+                })
+
+                if (!post) {
+                    throw Error("Post creation failed!")
+                }
+
+                const user = await User.findById(_id)
+                if (!user) {
+                    throw Error("User not found")
+                }
+
+                user.posts.push(post._id)
+                user.save()
+
+                return post
+            } else {
+                // If no picturePath provided, create a post without an image
+                const post = await this.create({
+                    title,
+                    body
+                })
+
+                if (!post) {
+                    throw Error("Post creation failed!")
+                }
+
+                const user = await User.findById(_id)
+                if (!user) {
+                    throw Error("User not found")
+                }
+
+                user.posts.push(post._id)
+                user.save()
+
+                return post
+            }
+        } catch (error) {
+            const result = error as Error
+            throw Error(result.message)
+        }
+    }
+)
 
 postSchema.static(
     "addPost",

@@ -28,8 +28,6 @@ const Post = () => {
                     <p>I'd sacrifice myself for a cat.</p>
                 </div>
                 <div className="flex items-center border-t border-input-grey py-4 px-6">
-
-                    {/* Like button */}
                     <button
                         className="text-3xl text-black hover:text-[#E50000] pr-2"
                         onMouseEnter={() => setIsHeart(true)}
@@ -38,8 +36,6 @@ const Post = () => {
                         {isHeart ? <PiHeartStraightFill /> : <PiHeartStraightBold />}
                     </button>
                     <p>16 likes</p>
-
-                    {/* Comment Button */}
                     <button className="text-3xl text-black pl-6 pr-2">
                         <PiChatTextBold />
                     </button>
