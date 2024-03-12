@@ -1,6 +1,19 @@
+import React, {useState} from 'react';
 import { PiImageBold, PiArrowCircleRightFill } from "react-icons/pi";
 
 const CreatePost = () => {
+
+    const[postContent, setPostContent] = useState('');
+
+    //testing phase
+    const handleInputChange = (event) =>{
+        setPostContent(event.target.value);
+    }
+
+    const handleSubmit =() => {
+        console.log(postContent);
+        setPostContent('');
+    }
     return (
         <div className="flex bg-dirty-white w-full h-auto rounded-2xl space-x-6 p-6 mb-8 shadow-md">
             <div>
