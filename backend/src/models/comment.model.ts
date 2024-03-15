@@ -1,4 +1,4 @@
-import { Model, Schema, model, Types } from "mongoose"
+import { Schema, Types, model } from "mongoose";
 
 const commentSchema = new Schema({
     poster_id: {
@@ -13,4 +13,9 @@ const commentSchema = new Schema({
             type: Types.ObjectId
         }
     ]
-})
+});
+
+// Create a model from the schema
+const Comment = model('Comment', commentSchema);
+
+export default Comment;
