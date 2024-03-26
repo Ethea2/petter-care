@@ -3,20 +3,18 @@ import { PiImageBold, PiArrowCircleRightFill, PiHeartStraightBold, PiChatTextBol
 
 const CreatePost = () => {
     const [postContent, setPostContent] = useState('');
-    const [posts, setPosts] = useState([]); // Initialize with empty array
-    const [isHeart, setIsHeart] = useState(false); // Hover state for heart icon
-    const [isBookmark, setIsBookmark] = useState(false); // Hover state for bookmark icon
+    const [posts, setPosts] = useState([]); 
+    //hover states lang for the icons 
+    const [isHeart, setIsHeart] = useState(false); 
+    const [isBookmark, setIsBookmark] = useState(false); 
 
     const handleInputChange = (event) => {
         setPostContent(event.target.value);
     }
 
     const addNewPost = () => {
-        // Create a new post object
         const newPost = { content: postContent };
-        // Add the new post to the beginning of the posts array
         setPosts([newPost, ...posts]);
-        // Clear the input field
         setPostContent('');
     };
 
@@ -45,7 +43,7 @@ const CreatePost = () => {
                 </div>
             </div>
 
-            {/* Render each post */}
+            {/* this will render each post that the usar will create/post */}
             {posts.map((post, index) => (
                 <div key={index} className="bg-dirty-white w-full h-auto rounded-2xl mb-6 mt-2 shadow-md">
                     <div className="flex items-center pt-6 pb-4 px-6">
@@ -64,7 +62,6 @@ const CreatePost = () => {
                         <p>{post.content}</p>
                     </div>
                     <div className="flex items-center border-t border-input-grey py-4 px-6">
-                        {/* Simplified hover logic */}
                         <button
                             className="text-3xl text-black hover:text-[#E50000] pr-2"
                             onMouseEnter={() => setIsHeart(true)}
@@ -72,11 +69,11 @@ const CreatePost = () => {
                         >
                             {isHeart ? <PiHeartStraightFill /> : <PiHeartStraightBold />}
                         </button>
-                        <p>16 likes</p>
+                        <p># of likes placeholder likes</p>
                         <button className="text-3xl text-black pl-6 pr-2">
                             <PiChatTextBold />
                         </button>
-                        <p>2 comments</p>
+                        <p># of comments placeholder comments</p>
                         <button
                             className="text-3xl text-black hover:text-[#EFBE69] pr-2 ml-auto"
                             onMouseEnter={() => setIsBookmark(true)}
