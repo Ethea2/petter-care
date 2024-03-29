@@ -108,7 +108,6 @@ const RegisterForm = () => {
                     </p>
                 </Group>
 
-                {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <div className="mt-14">
                     <Button
                         className="rounded-2xl duration-300 ease-in-out"
@@ -116,7 +115,7 @@ const RegisterForm = () => {
                         fullWidth
                         onClick={submit}
                     >
-                        Button
+                        Register
                     </Button>
                 </div>
 

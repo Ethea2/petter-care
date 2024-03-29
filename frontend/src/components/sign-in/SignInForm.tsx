@@ -33,7 +33,6 @@ const SignInForm = () => {
                 radius="md" 
                 required 
                 error=''
-                // TODO: Put error message here
             />
 
             <PasswordInput 
@@ -48,11 +47,9 @@ const SignInForm = () => {
             />
             
             <Group justify="space-between" mt="lg">
-                {/* BUG: checkbox label nasa right even if set with prop sa left AAAAAAAAA BOBO MO MANTINE */}
-                {/* For now... this is the fix */}
                 <div className='flex'>
                     <Checkbox className='mr-2'/> 
-                    <p className='text-sm'> I agree to the Privacy Policy </p>
+                    <p className='text-sm'> Remember me </p>
                 </div>
                 <Anchor component="button" size="sm">
                     Forgot password?
@@ -61,7 +58,7 @@ const SignInForm = () => {
 
             {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
             <div className='mt-20'>
-                <Button className='duration-300 ease-in-out rounded-2xl' color="primary-blue" fullWidth>Button</Button>
+                <Button className='duration-300 ease-in-out rounded-2xl' color="primary-blue" fullWidth>Sign in</Button>
             </div>
 
             <Group  mt="lg" className='justify-center'>
