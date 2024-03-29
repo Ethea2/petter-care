@@ -4,20 +4,43 @@ import {
     Title,
     NativeSelect,
     NumberInput,
+    FileButton,
+    ActionIcon,
+    Group,
     Button
 } from "@mantine/core"
 
+import { Link } from "react-router-dom"
+
 const CreatePet = () => {
+
+    const setFile = () => {
+        return null
+    }
+
     return (
         <>
             <Paper className="p-20 w-[60%] h-auto" shadow="lg" radius="lg">
-                <img
-                    className="mx-auto mb-6 w-40 h-40 rounded-full"
-                    src="/default-pet.svg"
-                    alt="Logo"
-                />
 
-                <Title className="text-2xl" ta="center">
+                <Group justify="center">
+                    <FileButton
+                        accept="image/png,image/jpeg"
+                        onChange={setFile}
+                    >
+                        {(props) => (
+                            <ActionIcon
+                                {...props}
+                                style={{ width: '30%', height: '30%', borderRadius: '50%' }}
+                            >
+                                <img
+                                    src="/default-pet.svg"
+                                />
+                            </ActionIcon>
+                        )}
+                    </FileButton>
+                </Group>
+
+                <Title className="text-2xl mt-5" ta="center">
                     Enter your pet details
                 </Title>
 
@@ -60,20 +83,28 @@ const CreatePet = () => {
                 />
 
                 <div className="flex justify-center">
-                    <Button
-                        className="rounded-2xl duration-300 ease-in-out mr-4"
-                        variant="outline"
-                        mt="xl"
+                    <Link
+                        to="/pet-access"
                     >
-                        Cancel
-                    </Button>
-                    <Button
-                        className="rounded-2xl duration-300 ease-in-out"
-                        color="primary-blue"
-                        mt="xl"
+                        <Button
+                            className="rounded-2xl duration-300 ease-in-out mr-4"
+                            variant="outline"
+                            mt="xl"
+                        >
+                            Cancel
+                        </Button>
+                    </Link>
+                    <Link
+                        to="/pet-profile"
                     >
-                        Submit
-                    </Button>
+                        <Button
+                            className="rounded-2xl duration-300 ease-in-out"
+                            color="primary-blue"
+                            mt="xl"
+                        >
+                            Submit
+                        </Button>
+                    </Link>
                 </div>
 
             </Paper>

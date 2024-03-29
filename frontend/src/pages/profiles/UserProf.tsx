@@ -11,9 +11,7 @@ const UserProf = () => {
                 </div>
                 <div className="lg:w-[65%] xl:w-[75%] 2xl:w-[80%] pl-10">
                     <CreatePost />
-                    <div>
-                        <ProfileFilter />
-                    </div>
+                    <ProfileFilter />
                 </div>
             </div>
         </>
