@@ -17,9 +17,9 @@ const ProfileCard = () => {
                 <div className="border-t border-input-grey text-base">
                     <button className="w-1/3 p-4 border-r border-input-grey rounded-bl-2xl">
                         <div className="flex flex-col justify-center items-center">
-                            <div className="text-3xl text-black pb-2">
+                            <a className="text-3xl text-black pb-2" href="/pet-access">
                                 <PiDogFill />
-                            </div>
+                            </a>
                             Pets
                         </div>
                     </button>
