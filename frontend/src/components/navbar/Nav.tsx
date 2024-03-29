@@ -62,7 +62,7 @@ const Nav = () => {
                                 <Link to="/user-profile">
                                     <UserButton
                                         className="hover:brightness-75    "
-                                        image="../../../public/user-profile.svg"
+                                        image="/user-profile.svg"
                                         name="Paula"
                                         username="ennxxx"
                                     />

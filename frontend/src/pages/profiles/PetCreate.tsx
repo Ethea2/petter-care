@@ -1,8 +1,10 @@
+import CreatePet from '../../components/profile/CreatePet'
+
 const PetCreate = () => {
     return (
         <>
-            <div className='fixed flex justify-center items-center w-screen h-screen bg-gradient-to-r from-primary-blue to-accent3-purple'>
-
+            <div className='flex py-20 justify-center items-center bg-gradient-to-r from-primary-blue to-accent3-purple'>
+                <CreatePet />
             </div>
         </>
     )
