@@ -4,6 +4,7 @@ import {
 } from "@mantine/core"
 
 import PetCalendar from './PetCalendar.tsx'
+import PetNotes from './PetNotes.tsx'
 
 const PetRecords = () => {
 
@@ -14,7 +15,7 @@ const PetRecords = () => {
                     <Tabs.List className="mb-3">
                         <Tabs.Tab value='appointments'>Appointments</Tabs.Tab>
                         <Tabs.Tab value='records'>Records & Documents</Tabs.Tab>
-                        <Tabs.Tab value='misc'>Miscellaneous</Tabs.Tab>
+                        <Tabs.Tab value='notes'>Notes</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value="appointments">
@@ -26,7 +27,8 @@ const PetRecords = () => {
                     <Tabs.Panel value="records">
                     </Tabs.Panel>
 
-                    <Tabs.Panel value="misc">
+                    <Tabs.Panel value="notes">
+                        <PetNotes />
                     </Tabs.Panel>
                 </Tabs>
 
