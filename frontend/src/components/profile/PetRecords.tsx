@@ -1,3 +1,5 @@
+
+
 import {
     Paper,
     Tabs
@@ -5,6 +7,7 @@ import {
 
 import PetCalendar from './PetCalendar.tsx'
 import PetNotes from './PetNotes.tsx'
+import PetDocuments from './PetDocuments.tsx'
 
 const PetRecords = () => {
 
@@ -14,7 +17,7 @@ const PetRecords = () => {
                 <Tabs defaultValue='appointments'>
                     <Tabs.List className="mb-3">
                         <Tabs.Tab value='appointments'>Appointments</Tabs.Tab>
-                        <Tabs.Tab value='records'>Records & Documents</Tabs.Tab>
+                        <Tabs.Tab value='docu'>Records & Documents</Tabs.Tab>
                         <Tabs.Tab value='notes'>Notes</Tabs.Tab>
                     </Tabs.List>
 
@@ -24,7 +27,8 @@ const PetRecords = () => {
                         </div>
                     </Tabs.Panel>
 
-                    <Tabs.Panel value="records">
+                    <Tabs.Panel value="docu">
+                        <PetDocuments />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="notes">

@@ -29,7 +29,6 @@ const CreatePost = () => {
             TextStyle,
             Color,
             TextAlign.configure({ types: ["heading", "paragraph"] }),
-            Placeholder.configure({ placeholder: "Start a post..." })
         ],
         content
     })
@@ -39,12 +38,11 @@ const CreatePost = () => {
     }
 
     return (
-        <div className="bg-white w-full h-auto rounded-2xl p-6 mb-8 shadow-md">
+        <div className="bg-white w-100 h-auto rounded-2xl p-6 shadow-md">
             <div className="flex justify-between">
-
-                <div className="w-full pl-6">
+                <div className="w-full">
                     <RichTextEditor editor={editor}>
-                        <RichTextEditor.Toolbar sticky stickyOffset={60}>
+                        <RichTextEditor.Toolbar sticky >
                             <RichTextEditor.ColorPicker
                                 colors={[
                                     "#25262b",
@@ -122,23 +120,6 @@ const CreatePost = () => {
 
                         <RichTextEditor.Content />
                     </RichTextEditor>
-
-                    <div className="flex flex-row text-primary-blue items-end mt-4">
-                        <FileButton
-                                accept="image/png,image/jpeg"
-                                onChange={setFile}
-                            >
-                                {(props) => (
-                                    <ActionIcon
-                                        {...props}
-                                        radius="xl"
-                                        size="xl"
-                                    >
-                                        <PiImageBold size={20} />
-                                    </ActionIcon>
-                                )}
-                        </FileButton>
-                    </div>
                 </div>
             </div>
 
