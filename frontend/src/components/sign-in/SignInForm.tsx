@@ -1,12 +1,12 @@
 import {
-    TextInput,
-    PasswordInput,
     Anchor,
-    Paper,
-    Title,
-    Text,
+    Button,
     Group,
-    Button
+    Paper,
+    PasswordInput,
+    Text,
+    TextInput,
+    Title
 } from "@mantine/core"
 
 import { Checkbox } from "@mantine/core"
