@@ -1,513 +1,501 @@
+// required libraries
 const sinon = require('sinon');
-const userModel = require('../backend/src/models/user.model');
-const authController = require('../backend/src/api/controllers/auth.controllers.ts');
-const userController = require('../backend/src/api/controllers/user.controllers.ts');
-const authMiddleWare = require('../backend/src/api/middleware/auth.middleware.ts');
-const { describe, beforeEach, afterEach } = require('node:test');
-const { default: User } = require('../backend/src/models/user.model');
-const jwt = require('jsonwebtoken');
-const { error } = require('console');
 
-describe('Input Validation For Login', () => {
-    // Setup response
-    let req = {
-        body: {
-            username : 'INPUT DATA HERE',
-            password : 'INPUT DATA HERE'
-        }
-    }
+// Models
+const modelPath = '../backend/src/models/';
+const userModel = require('../backend/src/models/user.model.ts').default;
 
-    let error = new Error({ error: 'Soup'});
+// APIs
+const apiPath = '../backend/src/api/';
+const authController = require(apiPath + 'controllers/auth.controller'); 
 
-    let res = {};
-
-    let expectedResults;
-
-    describe('login', () =>{
-        var loginStub;
-
-        beforeEach(() => {
-            // Setup before each test case
-            res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-            
-        });
-
-        afterEach(() => {
-            // Restore loginStub after each test case
-            loginStub.restore();
-        })
-
-        it('Should return 400 on server error', () => {
-            // Arrange
-            
-            loginStub = sinon.stub(userModel, 'login').yields(error)
-           
-            // Act
-            authController.login(req, res);
-
-            // Assert
-            sinon.assert.calledWith(authController.login, req.body);
-            sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledOnce(res.status(400).end);
+// Test Case 1: Input Validation for Login
+describe('Input Validation for Login Auth Controller', () => {
+    let error = new Error({ error: 'Some error message' });
+    let res, req, loginStub, authLoginSpy;
     
-        });
-
-        it('Should return 200 on successful login', () =>{
-            // Arrange
-            expectedResults = {
-                username: 'stswenguser',
-                password: 'dropaDB'
-            }
-            // Act
-            authController.login(req, res);
-
-            // Assert
-            sinon.assert.calledWith(authController.login, req.body);
-            sinon.assert.calledWith(res.json, sinon.match({ username: req.body.username }));
-            sinon.assert.calledWith(res.json, sinon.match({ password: req.body.password }));
-            
-        });
-    });
-    
-    describe('createToken', () =>{
-        var tokenStub;
-
-        beforeEach(() => {
-            // Setup before each test case
-            res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-            
-        });
-
-        afterEach(() => {
-            // Restore loginStub after each test case
-            tokenStub.restore();
-        })
-
-        it('should call jwt.sign with correct arguments', () => {
-            const  testID = 'REPLACE VALUE';
-            const expectedToken = 'mockToken';
-
-            // Arrange
-            // Mocking objectID
-            sinon.stub(moongose.Types, 'ObjectId').returns(testID);
-
-            // Mocking jwt.sign
-            tokenStub = sinon.stub(jwt, 'sign').returns(expectedToken);
-
-            // ACT
-            const token = authController.createToken(testID);
-
-            // Assert
-            sinon.assert.calledWith(jwt.sign, {_id: testID}, process.env.SECRET, { expiresIn: '3w' } );
-            expect(token).toBe(expectedToken);
-        })
-    });
-});
-
-describe('Password isHashed', () => {
-    var hashedStub;
-    beforeEach(() => {
+    // Failing Cases
+    describe('Empty Login Fields', () =>{
         // Setup before each test case
-        res = {
-            json: sinon.spy(),
-            status: sinon.stub().returns({ end: sinon.spy() })
-        };
-        
-    });
-
-    afterEach(() => {
-        // Restore loginStub after each test case
-        hashedStub.restore();
-    })
-
-    it('Should hash a password', async () => {
-        const password = 'password123';
-        // TODO: replace with actual hashing function of dev
-        const hashedPassword = await bcrypt.hash(password, 10);
-    
-        expect(hashedPassword).toBeDefined();
-    });    
-});
-
-describe('Input Validation For Sign Up', () => {
-    var signUpStub; 
-    
-    beforeEach(() => {
-        // before every test case setup first
-        res = {
-            json: sinon.spy(),
-            status: sinon.stub().returns({ end: sinon.spy() })
-        };
-    });
-
-    afterEach(() => {
-        // executed after the test case
-        signUpStub.restore();
-    });
-
-    let req = {
-        body: {
-            username: 'stswenguser',
-            email: 'myemail@.gmail.com',
-            password: 'Random content',
-            retypedpassword: 'Random content',
-            privacypolicy: true
-        }
-    };
-
-    
-    
-    describe('Sign Up with empty credentials', () => {
-        let reqEmpty = {
-            body: {
-                username: '',
-                email: '',
-                password: '',
-                retypedpassword: '',
-                privacypolicy: false
-            }
-        };
-
         beforeEach(() => {
-            // before every test case setup first
             res = {
                 json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
+                status: sinon.stub().returns({
+                    json: sinon.spy()
+                })
+            };
+
+            req = {
+                body: {
+                    username: '',
+                    password: ''
+                }
             };
         });
-    
+
         afterEach(() => {
             // executed after the test case
-            signUpStub.restore();
+            loginStub.restore();
+            authLoginSpy.restore();
+        });
+    
+        it('Should return status 400 on empty username and password', () => {
+            // Arrange
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+            authLoginSpy = sinon.spy(authController, 'login');
+
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);           
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
         });
 
-        it('Empty in all fields', async () => {
-            const reqEmpty = {
+        it('Should return status 400 on empty username and non-empty password', () => {
+            
+            // Arrange
+            req.body.password = 'letmeinpls';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+            authLoginSpy = sinon.spy(authController, 'login');
+
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
+        });
+
+        it('Should return status 400 on non-empty username and empty password', () => {
+            
+            // Arrange
+            req.body.username = 'youshallnotpass';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+            authLoginSpy = sinon.spy(authController, 'login');
+            
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
+        });
+    });
+
+    describe('Invalid Credentials', () => {
+        // Setup before each test case
+        beforeEach(() => {
+            res = {
+                json: sinon.spy(),
+                status: sinon.stub().returns({
+                    json: sinon.spy(),
+                    end: sinon.spy()
+                })
+            };
+
+            req = {
+                body: {
+                    username: '',
+                    password: ''
+                }
+            };
+        });
+        afterEach(() => {
+            loginStub.restore();
+            authLoginSpy.restore();
+        })
+
+        it('Should return status 400 on valid username and invalid password', () => {
+            
+            // Arrange
+            req.body.username = 'validusername';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+            authLoginSpy = sinon.spy(authController, 'login');
+            
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
+        });
+
+        it('Should return status 400 on invalid username and valid password', () => {
+            
+            // Arrange
+            req.body.password = 'validpassword';
+            loginStub = sinon.stub(userModel, 'login').yields(error);
+            authLoginSpy = sinon.spy(authController, 'login');
+            
+            // Act
+            authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
+        });
+    });
+
+    // Passing Case
+    describe('Valid Credentials', () => {
+        let res, req, loginStub;
+        
+        beforeEach(() => {
+            // Reset stubs and objects before each test
+            res = { 
+                status: sinon.stub().returnsThis(),
+                json: sinon.spy()
+            };
+    
+            req = {
+                body: {
+                    _id: "12345",
+                    username: 'testusername',
+                    password: 'testpassword'
+                }
+            };
+        });
+        // TODO: fix this
+        it('Should return jwt token and status 200', async () =>{
+
+            // Arrange
+            loginStub = sinon.stub(userModel, 'login').resolves(req.body);
+            authLoginSpy = sinon.spy(authController, 'login');
+            
+            // Act
+            await authController.login(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(loginStub);
+            sinon.assert.calledOnce(authLoginSpy);
+            sinon.assert.calledOnce(authController.login);
+            sinon.assert.calledWith(authController.login, req, res);
+            sinon.assert.calledWith(res.status, 200);
+        });
+    });
+});
+
+// Test Case 2: Hashed Password
+describe('Password Hashing',  () => {
+    // TODO: revise script in sheet
+    let res, req, signupStub, authSignupSpy, authSignupStub, createStub;
+    const mockUser = {
+        username: 'testusername',
+        password: 'testpassword'
+    };
+    beforeEach(() => {
+        // Reset stubs and objects before each test
+        res = {
+            status: sinon.stub().returns({
+                json: sinon.spy(),
+                end: sinon.spy()
+            })
+        };
+
+        req = {
+            body: {
+                username: 'testusername',
+                password: 'testpassword'
+            }
+        };
+    });
+
+    afterEach(()=>{
+        authSignupStub.restore();
+        signupStub.restore();
+        createStub.restore();
+    });
+
+    it('Should return hashed password', async() =>{
+        // Arrange
+        authSignupStub = sinon.stub(authController, 'signup').yields(200);
+        signupStub = sinon.spy(userModel, 'signup');
+        createStub = sinon.stub(userModel, 'create').resolves(mockUser);
+        
+        // Act
+        const result = await userModel.signup(req.body.username, req.body.password);
+       
+        // Assert
+        sinon.assert.calledOnce(signupStub);
+        sinon.assert.calledOnce(createStub);
+        expect(result).toEqual(mockUser);
+
+        sinon.assert.calledWith(signupStub, req.body.username, req.body.password);
+        sinon.assert.match(result, { username: 'testusername'});
+        expect(result.password != req.body.password);
+    });
+    
+    
+    it('Should return status 200', async() => {
+        // Arrange
+        signupStub = sinon.stub(userModel, 'signup').resolves(mockUser);
+        authSignupSpy = sinon.spy(authController, 'signup');
+        
+        // Act
+        await authController.signup(req, res);
+        
+        // Assert
+        sinon.assert.calledOnce(signupStub);
+        sinon.assert.calledOnce(authSignupSpy);
+        sinon.assert.calledOnce(authController.signup);
+        sinon.assert.calledWith(authController.signup, req, res);
+        sinon.assert.calledOnce(res.status.withArgs(200));
+        sinon.assert.calledWith(res.status, 200);
+      
+    })
+});
+
+// Test Case 3: User Input Validation for Register
+describe('Input Validation for Register', () =>{
+    describe('Empty Registration fields', () => {
+        let req = {};
+        let res = {};
+        let error = new Error("some error message");
+        let signupStub;
+
+        beforeEach(() => {
+            req = {
+                body: {
+                    username: 'testusername',
+                    email: 'testemail@tester.com',
+                    password: 'testpassword',
+                    confirmPassword: 'testpassword'
+                }
+            }
+            res = {
+                json: sinon.spy(),
+                status: sinon.stub().returnsThis(),
+                end: sinon.stub()
+            };
+        });
+
+        afterEach(() =>{
+            signupStub.restore()
+        })
+
+        it('Should return 400 on empty fields', () => {
+            
+            // Arrange
+            req = {
                 body: {
                     username: '',
                     email: '',
                     password: '',
-                    retypedpassword: '',
-                    privacypolicy: false
+                    confirmPassword: ''
                 }
-            };
+            }
+            
+            signupStub = sinon.stub(userModel, 'signup').yields(error)
+          
+            // Act
+            authController.signup(req, res);
 
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqEmpty)
-
-            authController.signup(reqEmpty, res);
-
-            // Add your assertions here based on your application logic
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
         });
         
-        it('Empty in username only', () => {
-            const reqUserNameEmpty = {
-                body: {
-                    username: '',
-                    email: 'a@gmail.com',
-                    password: 'asdf',
-                    retypedpassword: 'asdf',
-                    privacypolicy: true
-                }
-            };
-
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-            
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqUserNameEmpty)
-
-            authController.signup(reqUserNameEmpty, res);
-
-            // Add your assertions here based on your application logic
-            sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
-        });
-
-        it('Empty in email only', () => {
-            const reqEmailEmpty = {
-                body: {
-                    username: 'asdf',
-                    email: '',
-                    password: 'asdf',
-                    retypedpassword: 'asdf',
-                    privacypolicy: true
-                }
-            };
-
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqEmailEmpty)
-
-            authController.signup(reqEmailEmpty, res);
-
-            // Add your assertions here based on your application logic
-            sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
-        });
-
-        it('Empty in password only', () => {
-            const reqPasswordEmpty = {
-                body: {
-                    username: 'testUser',
-                    email: 'test@example.com',
-                    password: '', // Empty password
-                    retypedpassword: 'test123', 
-                    privacypolicy: true
-                }
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqPasswordEmpty)
+        it('Should return status 400 on empty username', () => {
             // Arrange
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
+            req.body.username = '';
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+           
 
-            // ACT
-            authController.signup(reqPasswordEmpty, res);
+            // Act
+            authController.signup(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
+            sinon.assert.calledWith(res.status, 400);
+        });
+
+        it('should return status 400 on empty password', () => {
+            // Arrange
+            req.body.password = '';
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
             
-            // ASSERT
+            // Act
+            authController.signup(req, res);
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "SignUp Failed" });
         });
 
-        it('Empty in confirm password only', () => {
-            const reqConfirmPasswordEmpty = {
-                body: {
-                    username: 'asdf',
-                    email: 'asdf@gmail.com',
-                    password: 'asdf',
-                    retypedpassword: '',
-                    privacypolicy: true
-                }
-            };
+      
+        it('should return status 400 on empty email', () => {
+            // Arrange
+            req.body.email = '';
 
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqConfirmPasswordEmpty)
-
-            authController.signup(reqConfirmPasswordEmpty, res);
-
-            // Add your assertions here based on your application logic
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            // Act
+            authController.signup(req, res);
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
         });
 
-        it('privacy policy is unticked', () => {
-            const reqPrivacyPolicyFalse = {
-                body: {
-                    username: 'asdf',
-                    email: 'asdf@gmail.com',
-                    password: 'asdf',
-                    retypedpassword: 'asdf',
-                    privacypolicy: false
-                }
-            };
+        
+        it('should return status 400 on empty confirmPassword', () => {
+            // Arrange
+            req.body.confirmPassword = '';
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            
+            // Act
+            authController.signup(req, res);
 
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqConfirmPasswordEmpty)
-
-            authController.signup(reqPrivacyPolicyFalse, res);
-
-            // Add your assertions here based on your application logic
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
         });
 
-        it('password and confirm password not the same', () => {
-            const reqPasswordNoMatch = {
-                body: {
-                    username: 'asdf',
-                    email: 'asdf@gmail.com',
-                    password: 'asdf',
-                    retypedpassword: 'asdfasdf',
-                    privacypolicy: true
-                }
-            };
+       
+        it('should return status 400 on mismatched passwords', () => {
+            
+            // Arrange
+            req.body.confirmPassword = 'imnotlikeotherpasswords';
+            signupStub = sinon.stub(userModel, 'signup').yields(error) 
+            
+            // Act
+            authController.signup(req, res);
 
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqPasswordNoMatch)
-
-            authController.signup(reqPasswordNoMatch, res);
-
-            // Add your assertions here based on your application logic
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledWith(userModel.signup, req.body.username, req.body.password);
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
         });
     });
+    
+    describe('Special characters in input fields', () => { 
+        let req = {};
+        let res = {};
+        let error = new Error('Some error message');
+        let signupStub, authSignupSpy;
 
-    describe('Sign Up with special characters', () => {
         beforeEach(() => {
-            // before every test case setup first
+            req = {
+                body: {
+                    username: 'testusername',
+                    email: 'testemail@tester.com',
+                    password: 'testpassword123',
+                    confirmPassword: 'testpassword'
+                }
+            }
             res = {
                 json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
+                status: sinon.stub().returnsThis(),
+                end: sinon.stub()
             };
         });
-    
-        afterEach(() => {
-            // executed after the test case
-            signUpStub.restore();
+
+        afterEach(() =>{
+            signupStub.restore();
+            authSignupSpy.restore();
         });
-        it('Sign Up with special characters in username field', () => {
-            const reqSpecialUsername = {
-                body: {
-                    username: 'user!@#🌙', // Username with special characters
-                    email: 'test@example.com',
-                    password: 'password123',
-                    retypedpassword: 'password123',
-                    privacypolicy: true
-                }
-            };
+
+        it('Should return status 400 when username contains special characters', () =>{
+            
             // Arrange
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            }
-            // ACT
-            authController.signup(reqSpecialUsername, res);
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            authSignupSpy = sinon.spy(authController, 'signup');
+            req.body.username = 'testusername👌😁!@#$%^&?>฿';
+            
+            // Act
+            authController.signup(req, res);
 
-            // ASSERT
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledOnce(authController.signup);
+            sinon.assert.calledWith(authController.signup, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
+
         });
-    
-        it('Sign Up with special characters in password field', () => {
-            const reqSpecialCharPassword = {
-                body: {
-                    username: 'asdf',
-                    email: 'asdf@gmail.com',
-                    password: '🌙🌙🌙',
-                    retypedpassword: 'asdf',
-                    privacypolicy: true
-                }
-            };
 
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
+        it('Should return status 400 when email contains special characters except @', () =>{          
+            
+            // Arrange
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            authSignupSpy = sinon.spy(authController, 'signup');
+            req.body.email = 'test💕email@tester.com!@#';
+            
+            
+            // Act
+            authController.signup(req, res);
 
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqSpecialCharPassword)
-
-            authController.signup(reqSpecialCharPassword, res);
-
-            // Add your assertions here based on your application logic
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledOnce(authController.signup);
+            sinon.assert.calledWith(authController.signup, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
             sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
+
+        });
+
+        it('Should return status 400 when password contains special characters', () => {
+            
+            // Arrange
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            authSignupSpy = sinon.spy(authController, 'signup');
+            req.body.password = 'testpassword😎123';
+            
+            // Act
+            authController.signup(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledOnce(authController.signup);
+            sinon.assert.calledWith(authController.signup, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
+
+        });
+
+        it('Should return status 400 when confirm password contains special characters', () => {
+            
+            // Arrange
+            signupStub = sinon.stub(userModel, 'signup').yields(error);
+            authSignupSpy = sinon.spy(authController, 'signup');
+            req.body.confirmPassword = 'testpa😒😒word';
+
+            // Act
+            authController.signup(req, res);
+
+            // Assert
+            sinon.assert.calledOnce(signupStub);
+            sinon.assert.calledOnce(authController.signup);
+            sinon.assert.calledWith(authController.signup, req, res);
+            sinon.assert.calledOnce(res.status.withArgs(400));
+            sinon.assert.calledWith(res.status, 400);
         });
         
-        it('Sign Up with special characters in confirm password field', () => {
-            const reqSpecialCharConfirmPassword = {
-                body: {
-                    username: 'asdf',
-                    email: 'asdf@gmail.com',
-                    password: 'asdf',
-                    retypedpassword: '🌙🌙🌙',
-                    privacypolicy: true
-                }
-            };
-
-            const res = {
-                json: sinon.spy(),
-                status: sinon.stub().returns({ end: sinon.spy() })
-            };
-
-            signUpStub = sinon.stub(userModel, 'signup').yields(reqSpecialCharConfirmPassword)
-
-            authController.signup(reqSpecialCharConfirmPassword, res);
-
-            // Add your assertions here based on your application logic
-            sinon.assert.calledWith(res.status, 400);
-            sinon.assert.calledWith(res.json, { error: "Signup failed" });
-        });
     });
-
-    it('Sign Up with invalid email format', () => {
-        const reqInvalidEmailFormat = {
-            body: {
-                username: 'asdf',
-                email: 'asdf',
-                password: 'asdf',
-                retypedpassword: 'asdf',
-                privacypolicy: true
-            }
-        };
-
-        const res = {
-            json: sinon.spy(),
-            status: sinon.stub().returns({ end: sinon.spy() })
-        };
-
-        signUpStub = sinon.stub(userModel, 'signup').yields(reqInvalidEmailFormat)
-
-        authController.signup(reqInvalidEmailFormat, res);
-
-        // Add your assertions here based on your application logic
-        sinon.assert.calledWith(res.status, 400);
-        sinon.assert.calledWith(res.json, { error: "Signup failed" });
-    });
-
-    it('Sign Up with valid Username, Email,  Password and Confirm Password', () => {
-        const reqValidSignup = {
-            body: {
-                username: 'validuser',
-                email: 'valid@example.com',
-                password: 'password123',
-                retypedpassword: 'password123',
-                privacypolicy: true
-            }
-        };
-        // Arrange
-        const res = {
-            json: sinon.spy(),
-            status: sinon.stub().returns({ end: sinon.spy() })
-        }
-
-        // ACT
-        authController.signup(reqValidSignup, res);
-
-        // ASSERT
-        sinon.assert.calledWith(res.status, 200);
-        sinon.assert.calledWith(res.json, { success: true, message: "Succesfully Signed up"})
-    });
-    
+});
+// Test Case 4: Verify Session management
+// TODO: Fill up code
+describe('JWT Token testing', () => {
+    // let res, req, tokenStub;
     
 });
-
-
-describe('Mobile Responsiveness', () => {
-    
-});
-
-describe('Remember Me', () => {
-    
-});
+// Test Case 5: Remember Me
+// TODO: Fill up code
