@@ -1,8 +1,36 @@
+import { useDisclosure } from '@mantine/hooks';
 import { PiNotePencilBold } from "react-icons/pi";
+import { Button, Modal, TextInput, Textarea } from "@mantine/core"
 
 const PetCard = () => {
+    const [opened, { open, close }] = useDisclosure(false);
+
     return (
-        <>
+        <>  
+            <Modal opened={opened} onClose={close} title="Edit profile" centered>
+                <TextInput
+                    className='mb-3'
+                    label="User Name"
+                    placeholder="Your username"
+                />
+
+                <Textarea
+                    className='mb-3'
+                    label="Bio"
+                    placeholder="Your bio"
+                />
+
+
+                <div className="mt-4 flex justify-end">
+                    <Button
+                        className="rounded-2xl duration-300 ease-in-out"
+                        color="primary-blue"
+                    >
+                        Save
+                    </Button>
+                </div>
+            </Modal>
+
             <div className="w-[100%] h-auto bg-dirty-white rounded-2xl mb-6 shadow-md justify-center">
                 <div className="flex justify-center items-center pt-10 pb-5">
                     <div className="flex justify-center items-center h-24 w-24 rounded-full drop-shadow">
@@ -16,15 +44,19 @@ const PetCard = () => {
                     <p className="pb-2"><strong>Breed: </strong>Beagle</p>
                     <p className="pb-2"><strong>Sex: </strong>Female</p>
                 </div>
-                <div className="border-t border-input-grey text-base">
-                    <button className="w-full p-4 border-input-grey rounded-bl-2xl">
+
+                {/* TODO: Add hover effect */}
+                <div 
+                    className="border-t border-input-grey text-base  hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
+                    onClick={open}
+                    >
+                    <div className="w-full p-4 border-input-grey rounded-bl-2xl">
                         <div className="flex flex-col justify-center items-center">
                             <a className="text-3xl text-black pb-2" href="/">
                                 <PiNotePencilBold />
                             </a>
-                            Edit
                         </div>
-                    </button>
+                    </div>
                 </div>
             </div>
         </>
