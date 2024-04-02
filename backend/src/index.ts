@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express"
+import express, { Express, NextFunction, Request, Response } from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 import mongoose from "mongoose"
@@ -12,12 +12,18 @@ const app: Express = express()
 const port = process.env.PORT || 4000
 
 //middlewares
-app.use(
-    cors({
-        origin: process.env.WEB_URL,
-        methods: ["GET", "POST", "PATCH", "DELETE"]
-    })
-)
+var corsOptions = function (req: Request, res: Response, next: NextFunction) {
+    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Content-Type, Authorization, Content-Length, X-Requested-With"
+    )
+    next()
+}
+
+app.use(corsOptions)
+
 app.use(express.json())
 
 app.use("/api/user", userRouter)
