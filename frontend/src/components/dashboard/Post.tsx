@@ -31,10 +31,6 @@ const Post = () => {
                             <p className="text-xs lg:text-base text-grey">@ennxxx</p>
                         </div>
 
-                        <Button className="ml-auto hover:bg-black rounded-2xl duration-300 ease-in-out">
-                            Follow
-                        </Button>
-
                     </div>
 
                     <div className="px-6 pb-4">
@@ -56,14 +52,6 @@ const Post = () => {
                             <PiChatTextBold />
                         </button>
                         <p className='pt-1'>2</p>
-
-                        <button
-                            className="text-3xl text-black hover:text-[#EFBE69] pr-2 ml-auto duration-300 ease-in-out"
-                            onMouseEnter={() => setIsBookmark(true)}
-                            onMouseLeave={() => setIsBookmark(false)}
-                        >
-                            {isBookmark ? <PiBookmarkSimpleFill /> : <PiBookmarkSimpleBold />}
-                        </button>
                     </div>
 
                 </Paper>
