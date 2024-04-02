@@ -22,6 +22,7 @@ const SignInForm = () => {
     const submitLogin = async () => {
         await login(username, password)
     }
+
     return (
         <>
             <Paper className="p-20 w-[100%] mr-10" shadow="lg" radius="lg">
@@ -46,7 +47,6 @@ const SignInForm = () => {
                     required
                     error=""
                     onChange={(e) => setUsername(e.target.value)}
-                    // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -58,12 +58,9 @@ const SignInForm = () => {
                     required
                     error=""
                     onChange={(e) => setPassword(e.target.value)}
-                    // TODO: Put error message here
                 />
 
                 <Group justify="space-between" mt="lg">
-                    {/* BUG: checkbox label nasa right even if set with prop sa left AAAAAAAAA BOBO MO MANTINE */}
-                    {/* For now... this is the fix */}
                     <div className="flex">
                         <Checkbox className="mr-2" />
                         <p className="text-sm">
@@ -76,7 +73,6 @@ const SignInForm = () => {
                     </Anchor>
                 </Group>
 
-                {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <div className="mt-20">
                     <Button
                         className="duration-301 ease-in-out rounded-2xl"

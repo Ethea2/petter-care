@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import '@mantine/core/styles.css';
 import '@mantine/tiptap/styles.css';
+import '@mantine/dates/styles.css';
 
 import { createTheme, MantineProvider } from '@mantine/core';
 

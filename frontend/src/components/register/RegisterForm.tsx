@@ -7,8 +7,8 @@ import {
     Group,
     Button
 } from "@mantine/core"
-import { useState } from "react"
 
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import useRegister from "../../hooks/useRegister"
 import { toast } from "react-toastify"
@@ -42,12 +42,13 @@ const RegisterForm = () => {
 
     return (
         <>
-            <Paper className="ml-10 p-20 w-full" shadow="lg" radius="lg">
+            <Paper className="p-20 w-full" shadow="lg" radius="lg">
                 <img
                     className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
                     src="/logo.svg"
                     alt="Logo"
                 />
+
                 <Title className="-m-1 text-3xl" ta="center">
                     Register your account
                 </Title>
@@ -61,7 +62,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setUsername(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
 
                 <TextInput
@@ -73,7 +74,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setEmail(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -85,7 +86,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setPassowrd(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -97,7 +98,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setConfirm(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
                 <Group justify="end" mt="lg">
                     <Checkbox />
@@ -107,7 +108,6 @@ const RegisterForm = () => {
                     </p>
                 </Group>
 
-                {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <div className="mt-14">
                     <Button
                         className="rounded-2xl duration-300 ease-in-out"
@@ -115,7 +115,7 @@ const RegisterForm = () => {
                         fullWidth
                         onClick={submit}
                     >
-                        Button
+                        Register
                     </Button>
                 </div>
 

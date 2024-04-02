@@ -4,6 +4,8 @@ import Register from "../../pages/home/Register"
 import Dashboard from "../../pages/home/Dashboard"
 import UserProf from "../../pages/profiles/UserProf"
 import PetProf from "../../pages/profiles/PetProf"
+import PetAccess from "../../pages/profiles/PetAccess"
+import PetCreate from "../../pages/profiles/PetCreate"
 import Post from "../../pages/ViewPost"
 
 const routes: Array<RouteType> = [
@@ -13,6 +15,8 @@ const routes: Array<RouteType> = [
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/user-profile", element: <UserProf /> },
     { path: "/pet-profile", element: <PetProf /> },
+    { path: "/pet-access", element: <PetAccess /> },
+    { path: "/pet-create", element: <PetCreate /> },
     { path: "/post", element: <Post /> },
 ]
 
