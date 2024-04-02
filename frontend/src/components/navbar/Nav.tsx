@@ -1,9 +1,7 @@
 // import { useState } from "react"
-import { TextInput, ActionIcon, rem, Menu } from "@mantine/core"
+import { rem, Menu } from "@mantine/core"
 
 import {
-    IconSearch,
-    IconArrowRight,
     IconLogout,
     IconSettings,
     IconMessageCircle
@@ -26,28 +24,6 @@ const Nav = () => {
                     >
                         <img src="/logo.svg" alt="Logo" />
                     </a>
-
-                    <TextInput
-                        className="w-1/2"
-                        radius="xl"
-                        size="md"
-                        placeholder="Search"
-                        rightSectionWidth={42}
-                        leftSection={
-                            <IconSearch
-                                style={{ width: rem(18), height: rem(18) }}
-                                stroke={1.5}
-                            />
-                        }
-                        rightSection={
-                            <ActionIcon size={32} radius="xl" variant="filled">
-                                <IconArrowRight
-                                    style={{ width: rem(18), height: rem(18) }}
-                                    stroke={1.5}
-                                />
-                            </ActionIcon>
-                        }
-                    />
                 </div>
 
                 {/* Right */}
