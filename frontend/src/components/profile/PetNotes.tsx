@@ -1,10 +1,10 @@
-import { ActionIcon, Button, FileButton } from "@mantine/core"
+// import { ActionIcon, Button, FileButton } from "@mantine/core"
 
 import { Link, RichTextEditor } from "@mantine/tiptap"
 import { IconColorPicker } from "@tabler/icons-react"
 import { Color } from "@tiptap/extension-color"
 import Highlight from "@tiptap/extension-highlight"
-import Placeholder from "@tiptap/extension-placeholder"
+// import Placeholder from "@tiptap/extension-placeholder"
 import SubScript from "@tiptap/extension-subscript"
 import Superscript from "@tiptap/extension-superscript"
 import TextAlign from "@tiptap/extension-text-align"
@@ -13,7 +13,7 @@ import Underline from "@tiptap/extension-underline"
 import { useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 
-import { PiImageBold } from "react-icons/pi"
+// import { PiImageBold } from "react-icons/pi"
 
 const content = ""
 
@@ -29,27 +29,17 @@ const CreatePost = () => {
             TextStyle,
             Color,
             TextAlign.configure({ types: ["heading", "paragraph"] }),
-            Placeholder.configure({ placeholder: "Start a post..." })
         ],
         content
     })
 
-    const setFile = () => {
-        return null
-    }
-
     return (
-        <div className="bg-white w-full h-auto rounded-2xl p-6 mb-8 shadow-md">
+        <div className="bg-white w-100 h-auto rounded-2xl p-6 shadow-md">
             <div className="flex justify-between">
-                <div>
-                    <div className="lg:w-12 xl:w-16">
-                        <img src="/user-profile.svg" alt="Profile" />
-                    </div>
-                </div>
-
-                <div className="w-full pl-6">
+                <div className="w-full">
+                    
                     <RichTextEditor editor={editor}>
-                        <RichTextEditor.Toolbar sticky stickyOffset={60}>
+                        <RichTextEditor.Toolbar sticky >
                             <RichTextEditor.ColorPicker
                                 colors={[
                                     "#25262b",
@@ -127,29 +117,6 @@ const CreatePost = () => {
 
                         <RichTextEditor.Content />
                     </RichTextEditor>
-
-                    <div className="flex flex-row text-primary-blue justify-between items-end">
-                        <div className="-mb-1">
-                            <FileButton
-                                accept="image/png,image/jpeg"
-                                onChange={setFile}
-                            >
-                                {(props) => (
-                                    <ActionIcon
-                                        {...props}
-                                        radius="xl"
-                                        size="xl"
-                                    >
-                                        <PiImageBold size={20} />
-                                    </ActionIcon>
-                                )}
-                            </FileButton>
-                        </div>
-
-                        <Button className="rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out">
-                            Post
-                        </Button>
-                    </div>
                 </div>
             </div>
 

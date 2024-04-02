@@ -2,17 +2,13 @@ import {
     TextInput,
     PasswordInput,
     Checkbox,
-    Anchor,
     Paper,
     Title,
-    Text,
-    UnstyledButton,
     Group,
-    Button,
-} from '@mantine/core';
+    Button
+} from "@mantine/core"
+
 import { useState } from "react"
-
-
 import { Link } from "react-router-dom"
 import useRegister from "../../hooks/useRegister"
 import { toast } from "react-toastify"
@@ -46,22 +42,28 @@ const RegisterForm = () => {
 
     return (
         <>
-        <Paper className='ml-10 p-20 w-full' shadow="lg" radius="lg">
-            <img className='mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out' src="/logo.svg" alt="Logo" />
-            <Title className='-m-1 text-3xl' ta="center">
-                Register your account
-            </Title>
-            
-            <TextInput 
-                className='mt-11' 
-                variant='filled' 
-                label="User Name" 
-                placeholder="Your username" 
-                radius="md" 
-                required 
-                error=''
+            <Paper className="p-20 w-full" shadow="lg" radius="lg">
+                <img
+                    className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
+                    src="/logo.svg"
+                    alt="Logo"
+                />
+
+                <Title className="-m-1 text-3xl" ta="center">
+                    Register your account
+                </Title>
+
+                <TextInput
+                    className="mt-11"
+                    variant="filled"
+                    label="User Name"
+                    placeholder="Your username"
+                    radius="md"
+                    required
+                    error=""
+                    onChange={(e) => setUsername(e.target.value)}
                 // TODO: Put error message here
-            />
+                />
 
                 <TextInput
                     variant="filled"
@@ -72,7 +74,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setEmail(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -84,28 +86,38 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setPassowrd(e.target.value)}
-                    // TODO: Put error message here
+                // TODO: Put error message here
                 />
 
-            <PasswordInput 
-                variant='filled' 
-                label="Password" 
-                placeholder="Your password" 
-                radius="md" 
-                mt="md" 
-                required
-                error=''
+                <PasswordInput
+                    variant="filled"
+                    label="Password"
+                    placeholder="Your password"
+                    radius="md"
+                    mt="md"
+                    required
+                    error=""
+                    onChange={(e) => setConfirm(e.target.value)}
                 // TODO: Put error message here
-            />
-            <Group justify="end" mt="lg">
-                <Checkbox/> 
-                    <p className='text-sm -ml-1'> I agree to the Privacy Policy </p>
+                />
+                <Group justify="end" mt="lg">
+                    <Checkbox />
+                    <p className="text-sm -ml-1">
+                        {" "}
+                        I agree to the Privacy Policy{" "}
+                    </p>
                 </Group>
 
-            {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
-            <div className='mt-14'>
-                <Button className='rounded-2xl duration-300 ease-in-out' color="primary-blue" fullWidth>Button</Button>
-            </div>
+                <div className="mt-14">
+                    <Button
+                        className="rounded-2xl duration-300 ease-in-out"
+                        color="primary-blue"
+                        fullWidth
+                        onClick={submit}
+                    >
+                        Register
+                    </Button>
+                </div>
 
                 <Group mt="lg" className="justify-center">
                     <p className="text-sm"> Have an account?</p>

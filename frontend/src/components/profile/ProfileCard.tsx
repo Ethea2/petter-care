@@ -1,4 +1,3 @@
-import { PiDogFill, PiCalendarFill, PiNotePencilBold } from "react-icons/pi";
 
 const ProfileCard = () => {
     return (
@@ -13,32 +12,6 @@ const ProfileCard = () => {
                     <p className="text-xl font-bold">Paula Pacheco</p>
                     <p className="text-grey pb-4">@ennxxx</p>
                     <p className="pb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </div>
-                <div className="border-t border-input-grey text-base">
-                    <button className="w-1/3 p-4 border-r border-input-grey rounded-bl-2xl">
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="text-3xl text-black pb-2">
-                                <PiDogFill />
-                            </div>
-                            Pets
-                        </div>
-                    </button>
-                    <button className="w-1/3 p-4">
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="text-3xl text-black pb-2">
-                                <PiCalendarFill />
-                            </div>
-                            Calendar
-                        </div>
-                    </button>
-                    <button className="w-1/3 p-4 border-l border-input-grey rounded-br-2xl">
-                        <div className="flex flex-col justify-center items-center">
-                            <div className="text-3xl text-black pb-2">
-                                <PiNotePencilBold />
-                            </div>
-                            Edit
-                        </div>
-                    </button>
                 </div>
 
             </div>
