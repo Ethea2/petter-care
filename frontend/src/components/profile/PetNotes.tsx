@@ -1,10 +1,10 @@
-import { ActionIcon, Button, FileButton } from "@mantine/core"
+// import { ActionIcon, Button, FileButton } from "@mantine/core"
 
 import { Link, RichTextEditor } from "@mantine/tiptap"
 import { IconColorPicker } from "@tabler/icons-react"
 import { Color } from "@tiptap/extension-color"
 import Highlight from "@tiptap/extension-highlight"
-import Placeholder from "@tiptap/extension-placeholder"
+// import Placeholder from "@tiptap/extension-placeholder"
 import SubScript from "@tiptap/extension-subscript"
 import Superscript from "@tiptap/extension-superscript"
 import TextAlign from "@tiptap/extension-text-align"
@@ -13,7 +13,7 @@ import Underline from "@tiptap/extension-underline"
 import { useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
 
-import { PiImageBold } from "react-icons/pi"
+// import { PiImageBold } from "react-icons/pi"
 
 const content = ""
 
