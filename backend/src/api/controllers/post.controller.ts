@@ -22,7 +22,6 @@ export const uploadPost = async (req: Request, res: Response) => {
 
     //TEST ID
    const _id = "1"
-
    
         const post = await Post.addPost(_id, title, body)
         return res.status(200).json(post)
