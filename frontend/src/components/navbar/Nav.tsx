@@ -1,5 +1,5 @@
 import { useDisclosure } from '@mantine/hooks';
-import { rem, Menu, Modal, Button, Group, TextInput, Textarea, PasswordInput } from "@mantine/core"
+import { rem, Menu, Modal, Button, TextInput, Textarea } from "@mantine/core"
 
 import {
     IconLogout,
