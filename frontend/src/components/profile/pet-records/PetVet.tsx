@@ -130,7 +130,7 @@ const PetVet = () => {
     <ScrollArea>
         {/* Top bar */}
         
-        <div className='flex justify-between space-x-4 p-2'>
+        <div className='flex justify-between space-x-4'>
             <div className='w-10/12'>
                 <TextInput
                     placeholder="Search by any field"
@@ -185,7 +185,7 @@ const PetVet = () => {
             </div>
         </div>
 
-        <Table horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
+        <Table withTableBorder highlightOnHover horizontalSpacing="md" verticalSpacing="xs" miw={700} layout="fixed">
             <Table.Tbody>
             <Table.Tr>
                 <Th
@@ -233,7 +233,7 @@ const PetVet = () => {
             )}
             </Table.Tbody>
         </Table>
-        </ScrollArea>
+    </ScrollArea>
   );
 }
 
