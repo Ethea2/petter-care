@@ -2,13 +2,12 @@ import {
   Paper, 
 } from '@mantine/core';
 import { useState } from "react";
-import { PiHeartStraightBold, PiHeartStraightFill, PiChatTextBold, PiBookmarkSimpleBold, PiBookmarkSimpleFill } from "react-icons/pi";
+import { PiHeartStraightBold, PiHeartStraightFill, PiChatTextBold } from "react-icons/pi";
 
 import { Link } from 'react-router-dom';
 
 const Post = () => {
     const [isHeart, setIsHeart] = useState(false);
-    const [isBookmark, setIsBookmark] = useState(false);
 
     return (
         <>
