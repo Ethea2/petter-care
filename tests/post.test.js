@@ -133,13 +133,6 @@ describe('The user must be logged in to create a post', () =>{
 
         it('should return status 500 if there is an upload error', async () =>{
             // Arrange
-            const postData = {
-               title: "Mock Post Title",
-               body:  "Mock post body content",
-               image: "mock-image-url.jpg",
-               upvotes: [],
-               comments: []
-           };   
            postStub = sinon.stub(postModel, 'addPostWithPicture').yields(error);
            postControllerSpy = sinon.spy(postController, 'uploadPost');
            
@@ -154,7 +147,8 @@ describe('The user must be logged in to create a post', () =>{
            sinon.assert.calledWith(res.status, 500);
            
        });
-       it('should return status 200 and return the post object if it has an image attached', async () =>{
+
+       it('should return status 500 if there is an upload error and it has an image attached', async () =>{
              // Arrange
              const postData = {
                 title: "Mock Post Title",
