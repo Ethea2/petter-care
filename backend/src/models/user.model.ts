@@ -35,16 +35,6 @@ export const userSchema = new Schema<IUser, UserModel>(
             {
                 type: Types.ObjectId
             }
-        ],
-        followers: [
-            {
-                type: Types.ObjectId
-            }
-        ],
-        following: [
-            {
-                type: Types.ObjectId
-            }
         ]
     },
     { timestamps: true }

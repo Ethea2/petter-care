@@ -1,10 +1,11 @@
 import {
-    Button,
-    Group,
-    Paper,
-    PasswordInput,
     TextInput,
-    Title
+    PasswordInput,
+    Checkbox,
+    Paper,
+    Title,
+    Group,
+    Button
 } from "@mantine/core"
 import { useState } from "react"
 
@@ -41,9 +42,9 @@ const RegisterForm = () => {
 
     return (
         <>
-            <Paper className="h-full p-20 px-40" shadow="lg" radius="lg">
+            <Paper className="ml-10 p-20 w-full" shadow="lg" radius="lg">
                 <img
-                    className="mx-auto pr-4 mb-12 w-2/3 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
+                    className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
                     src="/logo.svg"
                     alt="Logo"
                 />
@@ -52,7 +53,7 @@ const RegisterForm = () => {
                 </Title>
 
                 <TextInput
-                    className="mt-20"
+                    className="mt-11"
                     variant="filled"
                     label="User Name"
                     placeholder="Your username"
@@ -98,17 +99,21 @@ const RegisterForm = () => {
                     onChange={(e) => setConfirm(e.target.value)}
                     // TODO: Put error message here
                 />
-                {/* <Group justify="space-between" mt="lg">
-                <Checkbox label="I agree to the Privacy Policy"/>
-            </Group> */}
+                <Group justify="end" mt="lg">
+                    <Checkbox />
+                    <p className="text-sm -ml-1">
+                        {" "}
+                        I agree to the Privacy Policy{" "}
+                    </p>
+                </Group>
 
                 {/* BUG: variant: filled would not work at all AAAAAAAAAAAAAAAAAAAAAAAAAAAA */}
                 <div className="mt-14">
                     <Button
-                        variant="outline"
+                        className="rounded-2xl duration-300 ease-in-out"
                         color="primary-blue"
-                        onClick={submit}
                         fullWidth
+                        onClick={submit}
                     >
                         Button
                     </Button>

@@ -41,7 +41,31 @@ const petSchema = new Schema<IPets | PetModel>({
     picture: {
         type: String
     },
+    sex: {
+        type: String,
+        enum: ["male", "female"]
+    },
     medicalRecords: [
+        {
+            type: Object
+        }
+    ],
+    wants: [
+        {
+            type: String
+        }
+    ],
+    hates: [
+        {
+            type: String
+        }
+    ],
+    vetVisits: [
+        {
+            type: Object
+        }
+    ],
+    notes: [
         {
             type: String
         }

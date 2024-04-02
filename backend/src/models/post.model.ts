@@ -21,7 +21,13 @@ interface PostModel extends Model<IPost> {
         body: string,
         picturePath: string
     ): IPost
-    createPost(_id: string, title: string, body: string, picturePath?: string): Promise<IPost>
+    createPost(
+        _id: string,
+        title: string,
+        body: string,
+        picturePath?: string
+    ): Promise<IPost>
+    getAllPosts(): Promise<Array<IPost>>
 }
 
 export const postSchema = new Schema<IPost, PostModel>({
@@ -38,7 +44,7 @@ export const postSchema = new Schema<IPost, PostModel>({
     },
     upvotes: [
         {
-            type: Types.ObjectId
+            type: Number
         }
     ],
     comments: [
@@ -179,6 +185,19 @@ postSchema.static(
         }
     }
 )
+
+postSchema.static("getAllPosts", async function getAllPosts() {
+    try {
+        const posts = await this.find({})
+        if (!posts) {
+            throw Error("There are no posts available!")
+        }
+        return posts
+    } catch (e) {
+        const result = e as Error
+        throw Error(result.message)
+    }
+})
 
 const Post = model<IPost, PostModel>("Post", postSchema)
 export default Post

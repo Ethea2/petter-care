@@ -5,6 +5,7 @@
   --vt-c-accent2-indigo: #293855;
   --vt-c-accent3-purple: #8E54E9;
   --vt-c-white: #FFFFFF;
+  --vt-c-hover-white: #EBEBEB;
   --vt-c-dirty-white: #F4F7F9;
   --vt-c-off-white: #BABABA;
   --vt-c-black: #1E1E1E;
@@ -49,4 +50,8 @@
 .floating-image:nth-child(5) {
   animation: floatUpDown 3s infinite 4s;
   /* 4s delay for the fifth image */
+}
+
+.dark-hover:hover {
+  filter: brightness(80%);
 }
