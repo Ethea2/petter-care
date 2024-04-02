@@ -15,7 +15,7 @@ import { PiHouseFill, PiBellFill } from "react-icons/pi"
 const Nav = () => {
     return (
         <>
-            <div className="sticky top-0 flex items-center w-full h-auto bg-dirty-white py-3 drop-shadow-md relative z-50 justify-between">
+            <div className="sticky top-0 flex items-center w-full h-auto bg-dirty-white py-3 drop-shadow-md z-50 justify-between">
                 {/* Logo and Search*/}
                 <div className="flex w-95">
                     <a
