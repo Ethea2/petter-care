@@ -33,14 +33,11 @@ const CreatePost = () => {
         content
     })
 
-    const setFile = () => {
-        return null
-    }
-
     return (
         <div className="bg-white w-100 h-auto rounded-2xl p-6 shadow-md">
             <div className="flex justify-between">
                 <div className="w-full">
+                    
                     <RichTextEditor editor={editor}>
                         <RichTextEditor.Toolbar sticky >
                             <RichTextEditor.ColorPicker

@@ -1,38 +1,34 @@
-
-
 import {
     Paper,
     Tabs
 } from "@mantine/core"
 
-import PetCalendar from './PetCalendar.tsx'
-import PetNotes from './PetNotes.tsx'
-import PetDocuments from './PetDocuments.tsx'
+import PetInfo from './pet-records/PetInfo'
+import PetMeds from './pet-records/PetMeds'
+import PetVet from './pet-records/PetVet'
 
 const PetRecords = () => {
 
     return (
         <>  
             <Paper className="p-9 w-full h-auto" shadow="lg" radius="lg">
-                <Tabs defaultValue='appointments'>
+                <Tabs defaultValue='info'>
                     <Tabs.List className="mb-3">
-                        <Tabs.Tab value='appointments'>Appointments</Tabs.Tab>
-                        <Tabs.Tab value='docu'>Records & Documents</Tabs.Tab>
-                        <Tabs.Tab value='notes'>Notes</Tabs.Tab>
+                        <Tabs.Tab value='info'>Information</Tabs.Tab>
+                        <Tabs.Tab value='meds'>Medications</Tabs.Tab>
+                        <Tabs.Tab value='vet'>Vet Visits</Tabs.Tab>
                     </Tabs.List>
 
-                    <Tabs.Panel value="appointments">
-                        <div className="">
-                            <PetCalendar />
-                        </div>
+                    <Tabs.Panel value="info">
+                        <PetInfo />
                     </Tabs.Panel>
 
-                    <Tabs.Panel value="docu">
-                        <PetDocuments />
+                    <Tabs.Panel value="meds">
+                       <PetMeds />
                     </Tabs.Panel>
 
-                    <Tabs.Panel value="notes">
-                        <PetNotes />
+                    <Tabs.Panel value="vet">
+                        <PetVet />
                     </Tabs.Panel>
                 </Tabs>
 

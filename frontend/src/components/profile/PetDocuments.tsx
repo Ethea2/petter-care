@@ -8,8 +8,6 @@ import {
 
 import { useDisclosure } from '@mantine/hooks';
 
-import RecordCard from './pet-records/RecordCard.tsx';
-
 const PetRecords = () => {
     const [opened, { open, close }] = useDisclosure(false);
 
