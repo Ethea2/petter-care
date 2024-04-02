@@ -1,6 +1,5 @@
 import {
   Paper, 
-  Button,
 } from '@mantine/core';
 import { useState } from "react";
 import { PiHeartStraightBold, PiHeartStraightFill, PiChatTextBold, PiBookmarkSimpleBold, PiBookmarkSimpleFill } from "react-icons/pi";
