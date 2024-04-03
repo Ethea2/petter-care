@@ -10,17 +10,16 @@ import { toast } from "react-toastify"
 
 const Dashboard = () => {
     const router = useNavigate()
-    const { user } = useAuth()
+
+    const user = JSON.parse(localStorage.getItem("user") as string)
     useEffect(() => {
-        setTimeout(() => {
-            if (!user) {
-                router("/sign-in")
-                toast("You must be signed in", {
-                    type: "warning",
-                    autoClose: 5000
-                })
-            }
-        }, 4000)
+        if (!user) {
+            router("/sign-in")
+            toast("You must be signed in", {
+                type: "warning",
+                autoClose: 5000
+            })
+        }
     }, [])
 
     return (
