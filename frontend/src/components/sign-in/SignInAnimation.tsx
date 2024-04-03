@@ -1,17 +1,17 @@
 const SignInAnimation = () => {
     return (
         <>
-            <div className='mr-10'>
+            <div>
                 {/* Marni */}
-                <img className='left-[22%] bottom-[-10%] floating-image' src="/sprites/marni.png" />
+                <img className='fixed 2xl:left-[18%] lg:left-[11%] 2xl:bottom-[-10%] lg:bottom-[-28%] floating-image' src="/sprites/marni.png" />
                 {/* Medal */}
-                <img className='left-[47%] top-[45%] h-1/6 floating-image' src="/sprites/img1.svg" />
+                <img className='fixed 2xl:left-[45%] lg:left-[45%] 2xl:top-[45%] lg:top-[45%] h-1/6 floating-image' src="/sprites/img1.svg" />
                 {/* Calendar */}
-                <img className='left-[42%] top-[3%] h-1/5 floating-image' src="/sprites/img2.svg" />
+                <img className='fixed 2xl:left-[42%] lg:left-[42%] 2xl:top-[3%] lg:top-[3%] h-1/5 floating-image' src="/sprites/img2.svg" />
                 {/* Board */}
-                <img className='h-1/5 left-[8%] top-[29%] floating-image' src="/sprites/img3.svg" />
+                <img className='fixed 2xl:left-[4%] lg:left-[1%] 2xl:top-[29%] lg:top-[29%] h-1/5 floating-image' src="/sprites/img3.svg" />
                 {/* Paw */}
-                <img className='h-1/5 left-[15%] top-[72%] floating-image' src="/sprites/img5.svg" />
+                <img className='fixed 2xl:left-[8%] lg:left-[6%] 2xl:top-[72%] lg:top-[72%] h-1/5 floating-image' src="/sprites/img5.svg" />
             </div>
         </>
     )

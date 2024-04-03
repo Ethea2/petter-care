@@ -3,7 +3,7 @@ const RegisterAnimation = () => {
         <>
             <div>
                 {/* Marni */}
-                <img className='fixed right-[16%] bottom-[-10%] floating-image' src="/sprites/badrun.png" /> {/* TODO: Fix shrinking for Marni */}
+                <img className='fixed right-[16%] bottom-[-10%] floating-image' src="/sprites/badrun.png" />
                 {/* Stethoscope */}
                 <img className='fixed right-[42%] top-[30%] h-1/5 floating-image' src="/sprites/img6.svg" />
                 {/* Board */}
