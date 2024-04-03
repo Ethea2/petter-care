@@ -189,7 +189,8 @@ const CreatePost = () => {
                             </FileButton>
                         </div>
 
-                        <Button className="rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out">
+                        <Button className="rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out"
+                        onClick={uploadPost}>
                             Post
                         </Button>
                     </div>
