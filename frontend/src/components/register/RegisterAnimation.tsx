@@ -3,13 +3,13 @@ const RegisterAnimation = () => {
         <>
             <div>
                 {/* Marni */}
-                <img className='fixed right-[16%] bottom-[-10%] floating-image' src="/sprites/badrun.png" />
+                <img className='fixed 2xl:right-[15%] lg:right-[10%] 2xl:bottom-[-3%] lg:bottom-[-15%] floating-image' src="/sprites/badrun.png" />
                 {/* Stethoscope */}
-                <img className='fixed right-[42%] top-[30%] h-1/5 floating-image' src="/sprites/img6.svg" />
+                <img className='fixed 2xl:right-[42%] lg:right-[40%] 2xl:top-[28%] lg:top-[22%] h-1/5 floating-image' src="/sprites/img6.svg" />
                 {/* Board */}
-                <img className='fixed right-[4%] top-[37%] h-1/5 floating-image' src="/sprites/img7.svg" />
+                <img className='fixed 2xl:right-[4%] lg:right-[3%] 2xl:top-[37%] lg:top-[33%] h-1/5 floating-image' src="/sprites/img7.svg" />
                 {/* Paw */}
-                <img className='fixed h-1/6 right-[19%] top-[10%] floating-image' src="/sprites/img8.svg" />
+                <img className='fixed 2xl:right-[30%] lg:right-[32%] 2xl:top-[5%] 2xlgl:top-[5%] h-1/6 floating-image' src="/sprites/img8.svg" />
             </div>
         </>
     )
