@@ -1,21 +1,21 @@
 import { useEffect } from "react"
+import { BrowserRouter as Router } from "react-router-dom"
 import Layout from "./layouts/Layouts"
-import { BrowserRouter as Router } from "react-router-dom";
 
-import '@mantine/core/styles.css';
-import '@mantine/tiptap/styles.css';
-import '@mantine/dates/styles.css';
+import "@mantine/core/styles.css"
+import "@mantine/dates/styles.css"
+import "@mantine/tiptap/styles.css"
 
-import { createTheme, MantineProvider } from '@mantine/core';
+import { createTheme, MantineProvider } from "@mantine/core"
 
 const theme = createTheme({
-    fontFamily: 'Inter, sans-serif',
-    black: '#1E1E1E',
-    primaryColor: 'primary-blue',
+    fontFamily: "Inter, sans-serif",
+    black: "#1E1E1E",
+    primaryColor: "primary-blue",
     autoContrast: true,
-    
+
     colors: {
-        'primary-blue': [
+        "primary-blue": [
             "#eaf1ff",
             "#d6dffc",
             "#acbcf0",
@@ -26,8 +26,8 @@ const theme = createTheme({
             "#244bbc",
             "#1c43aa",
             "#0d3897"
-            ],
-        'secondary-yellow': [
+        ],
+        "secondary-yellow": [
             "#fff6e3",
             "#fcecd0",
             "#f6d8a4",
@@ -38,8 +38,8 @@ const theme = createTheme({
             "#cd8a13",
             "#b77b09",
             "#9f6900"
-            ],
-        'accent1-neon-blue': [
+        ],
+        "accent1-neon-blue": [
             "#e1ffff",
             "#cefcfc",
             "#a3f6f6",
@@ -50,8 +50,8 @@ const theme = createTheme({
             "#00cece",
             "#00b8b8",
             "#009f9f"
-            ],
-        'accent2-indigo': [
+        ],
+        "accent2-indigo": [
             "#f1f4f8",
             "#e2e5eb",
             "#c0c8d7",
@@ -62,8 +62,8 @@ const theme = createTheme({
             "#506592",
             "#465a83",
             "#384d75"
-            ],
-        'accent3-purple': [
+        ],
+        "accent3-purple": [
             "#f5ebff",
             "#e4d4fe",
             "#c5a7f6",
@@ -74,8 +74,8 @@ const theme = createTheme({
             "#5e18cb",
             "#5414b6",
             "#470da1"
-            ],
-        'dirty-white': [
+        ],
+        "dirty-white": [
             "#f2f5f8",
             "#e5e8e9",
             "#c7cfd5",
@@ -86,8 +86,8 @@ const theme = createTheme({
             "#5a778c",
             "#4e6a7e",
             "#3d5c70"
-            ],
-        'black': [
+        ],
+        black: [
             "#f5f5f5",
             "#e7e7e7",
             "#cdcdcd",
@@ -98,8 +98,8 @@ const theme = createTheme({
             "#717171",
             "#656565",
             "#575757"
-            ],
-        'white-darken': [
+        ],
+        "white-darken": [
             "#fbf3f5",
             "#e7e7e7",
             "#cdcdcd",
@@ -112,33 +112,28 @@ const theme = createTheme({
             "#5c5557"
         ]
     }
-});
+})
 
 function App() {
-
     useEffect(() => {
-        const interval = setInterval(() => {
-        }, 10000)
+        const interval = setInterval(() => {}, 10000)
         return () => clearInterval(interval)
     }, [])
 
-//import { useState } from "react"
-// import reactLogo from "./assets/react.svg"
-// import viteLogo from "/vite.svg"
-//import "./App.css"
+    //import { useState } from "react"
+    // import reactLogo from "./assets/react.svg"
+    // import viteLogo from "/vite.svg"
+    //import "./App.css"
 
-//function App() {
-//     const [count, setCount] = useState(0)
-
+    //function App() {
+    //     const [count, setCount] = useState(0)
 
     return (
-        
-            <Router>
-                <MantineProvider theme={theme}>
-                    <Layout />
-                </MantineProvider>
-            </Router>
-        
+        <Router>
+            <MantineProvider theme={theme}>
+                <Layout />
+            </MantineProvider>
+        </Router>
     )
 }
 
