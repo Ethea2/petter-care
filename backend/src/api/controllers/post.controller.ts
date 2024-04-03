@@ -22,12 +22,12 @@ export const uploadPost = async (req: Request, res: Response) => {
         // const post = await Post.addPost(_id, title, body)
         // return res.status(200).json(post)
 
-        const post = new PostModel({ poster_id: _id, title: title });
+        const post = new PostModel({ title: title, body: body });
 
 //        _id: string, title: string, body: string
         await post.save();
     
-
+        res.status(201).json(post);
     } catch (error) {
         const result = error as Error
         return res.status(500).json({ message: result.message })
