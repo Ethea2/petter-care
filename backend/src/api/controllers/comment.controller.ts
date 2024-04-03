@@ -3,7 +3,6 @@ import CommentModel from '../../models/comment.model';
 import jwt, { JwtPayload } from "jsonwebtoken"
 import PostModel from '../../models/post.model';
 
-// Add a new comment
 export const addComment = async (req: Request, res: Response) => {
   try {
     const { content, post_id } = req.body;
