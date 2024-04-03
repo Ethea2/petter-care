@@ -15,6 +15,14 @@ import StarterKit from "@tiptap/starter-kit"
 
 import { PiImageBold } from "react-icons/pi"
 
+// add import from controller
+
+import axios from "axios"
+import { useAuth } from "../../hooks/useAuth"
+import { toast } from "react-toastify"
+//import { uploadPost } from '../../controllers/post.controller'
+
+
 const content = ""
 
 const CreatePost = () => {
@@ -33,6 +41,41 @@ const CreatePost = () => {
         ],
         content
     })
+
+    
+    const uploadPost = async () => {
+        if (!editor) {
+            toast("Post Box not initialized", {
+                type: "error",
+                autoClose: 3000
+            })
+            return
+        }
+        const postContent = editor.getHTML()
+        const res = await axios.post(
+            import.meta.env.VITE_DEFAULT_URL + "/api/post/",
+            {
+                content: postContent
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user?.token}`
+                }
+            }
+        )       
+        if (res.status !== 200) {
+            toast("Something went wrong", {
+                type: "error",
+                autoClose: 3000
+            })
+            return
+        }
+        toast("Post added successfully!", {
+            type: "success",
+            autoClose: 3000
+        })
+    }
 
     const setFile = () => {
         return null
