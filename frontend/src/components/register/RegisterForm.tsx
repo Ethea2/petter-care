@@ -42,7 +42,7 @@ const RegisterForm = () => {
 
     return (
         <>
-            <Paper className="p-20 w-full" shadow="lg" radius="lg">
+            <Paper className="px-20 py-10 w-full" shadow="lg" radius="lg">
                 <img
                     className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
                     src="/logo.svg"
