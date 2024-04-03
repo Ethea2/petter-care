@@ -25,9 +25,9 @@ const SignInForm = () => {
 
     return (
         <>
-            <Paper className="p-20 w-[100%] mr-10" shadow="lg" radius="lg">
+            <Paper className="p-20 w-200 mr-10" shadow="lg" radius="lg">
                 <img
-                    className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
+                    className="mx-auto pr-4 mb-6 w-[70%] hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
                     src="/logo.svg"
                     alt="Logo"
                 />
