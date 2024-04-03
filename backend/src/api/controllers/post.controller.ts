@@ -5,17 +5,29 @@ import User from "../../models/user.model"
 import { IUser } from "../../types/user.types"
 import { Types } from "mongoose"
 
+import PostModel from '../../models/post.model';
+
 export const uploadPost = async (req: Request, res: Response) => {
     try {
         const { title, body } = req.body
         const { authorization } = req.headers
+
         if (!authorization) {
             return res.status(401).json({ message: "Token required!" })
         }
+
         const token = authorization.split(" ")[1]
         const { _id } = jwt.verify(token, process.env.SECRET!) as JwtPayload
-        const post = await Post.addPost(_id, title, body)
-        return res.status(200).json(post)
+
+        // const post = await Post.addPost(_id, title, body)
+        // return res.status(200).json(post)
+
+        const post = new PostModel({ poster_id: _id, title: title });
+
+//        _id: string, title: string, body: string
+        await post.save();
+    
+
     } catch (error) {
         const result = error as Error
         return res.status(500).json({ message: result.message })
