@@ -49,7 +49,8 @@ export const postSchema = new Schema<IPost, PostModel>({
     ],
     comments: [
         {
-            type: Types.ObjectId
+            type: Types.ObjectId,
+            ref: 'comment'
         }
     ]
 })
