@@ -11,4 +11,5 @@ export interface IUser {
     followers: any[]
     following: any[]
     picture: string
+    bio: string
 }

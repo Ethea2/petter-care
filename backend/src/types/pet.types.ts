@@ -13,6 +13,7 @@ export interface IPets {
     wants: Array<string>
     hates: Array<string>
     notes: Array<string>
+    age: number
 }
 
 //temporary medical record field.
