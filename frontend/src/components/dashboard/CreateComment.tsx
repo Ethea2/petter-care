@@ -7,10 +7,14 @@ import TextStyle from "@tiptap/extension-text-style"
 import Underline from "@tiptap/extension-underline"
 import { useEditor } from "@tiptap/react"
 import StarterKit from "@tiptap/starter-kit"
+import axios from "axios"
+import { useAuth } from "../../hooks/useAuth"
+import { toast } from "react-toastify"
 
 const content = ""
 
 const CreateComment = () => {
+    const { user } = useAuth()
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -22,6 +26,41 @@ const CreateComment = () => {
         ],
         content
     })
+
+    const postComment = async () => {
+        if (!editor) {
+            toast("Comment Box not initialized", {
+                type: "error",
+                autoClose: 3000
+            })
+            return
+        }
+        const commentContent = editor.getHTML()
+        const res = await axios.post(
+            import.meta.env.VITE_DEFAULT_URL + "/api/comment/",
+            {
+                content: commentContent
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user?.token}`
+                }
+            }
+        )       
+        if (res.status !== 200) {
+            toast("Something went wrong", {
+                type: "error",
+                autoClose: 3000
+            })
+            return
+        }
+        toast("Comment added successfully!", {
+            type: "success",
+            autoClose: 3000
+        })
+    }
+
 
     return (
         <>
@@ -73,7 +112,10 @@ const CreateComment = () => {
                         </RichTextEditor>
 
                         <div className="flex flex-row text-primary-blue justify-between items-end">
-                            <Button className="ml-auto rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out">
+                            <Button 
+                                className="ml-auto rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out"
+                                onClick={postComment}
+                            >
                                 Comment
                             </Button>
                         </div>

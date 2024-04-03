@@ -8,6 +8,7 @@ import bcrypt from "bcrypt"
 import postRouter from "./api/routes/post.routes"
 import morgan from "morgan"
 import petRoutes from "./api/routes/pet.routes"
+import commentRouter from "./api/routes/comment.routes"
 
 dotenv.config()
 
@@ -35,6 +36,7 @@ app.use("/api/user", userRouter)
 app.use("/api/auth", authRouter)
 app.use("/api/post", postRouter)
 app.use("/api/pet", petRoutes)
+app.use("/api/comment", commentRouter)
 
 //server initialization
 mongoose.connect(process.env.MONGODB_URI!).then(() => {
