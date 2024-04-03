@@ -153,14 +153,6 @@ const CreatePost = () => {
                 </div>
             </div>
 
-            {/* <Textarea
-                variant="filled"
-                placeholder="Start a post..."
-                radius='md'
-                autosize
-                minRows={2}
-                className="w-full pt-1"
-            /> */}
         </div>
     )
 }
