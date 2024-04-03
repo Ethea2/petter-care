@@ -1,7 +1,5 @@
-import { Types } from "mongoose"
-
 export interface IPets {
-    _id?: Types.ObjectId | string
+    _id?: string
     name: string
     breed: string
     weight: Number
@@ -16,7 +14,6 @@ export interface IPets {
     age: number
 }
 
-//temporary medical record field.
 export interface IMedicalRecords {
     doctor: string
     reason: string

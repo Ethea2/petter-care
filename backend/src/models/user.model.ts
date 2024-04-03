@@ -24,7 +24,8 @@ export const userSchema = new Schema<IUser, UserModel>(
         },
         picture: {
             type: String,
-            default: "temporary default picture"
+            default:
+                "https://res.cloudinary.com/dtocowzq2/image/upload/v1712161389/petter-care-defaults/hzvee1ombjfg9p5invvt.svg"
         },
         pets: [
             {
@@ -35,7 +36,11 @@ export const userSchema = new Schema<IUser, UserModel>(
             {
                 type: Types.ObjectId
             }
-        ]
+        ],
+        bio: {
+            type: String,
+            default: "Pet lover here!"
+        }
     },
     { timestamps: true }
 )

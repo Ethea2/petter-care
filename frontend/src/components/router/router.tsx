@@ -14,10 +14,10 @@ const routes: Array<RouteType> = [
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
     { path: "/user-profile", element: <UserProf /> },
-    { path: "/pet-profile", element: <PetProf /> },
+    { path: "/pet-profile/:id", element: <PetProf /> },
     { path: "/pet-access", element: <PetAccess /> },
     { path: "/pet-create", element: <PetCreate /> },
-    { path: "/post", element: <Post /> },
+    { path: "/post", element: <Post /> }
 ]
 
 export default routes

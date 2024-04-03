@@ -7,6 +7,8 @@ import "@mantine/dates/styles.css"
 import "@mantine/tiptap/styles.css"
 
 import { createTheme, MantineProvider } from "@mantine/core"
+import { Bounce, ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const theme = createTheme({
     fontFamily: "Inter, sans-serif",
@@ -130,6 +132,19 @@ function App() {
 
     return (
         <Router>
+            <ToastContainer
+                position="bottom-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+                transition={Bounce}
+            />
             <MantineProvider theme={theme}>
                 <Layout />
             </MantineProvider>
