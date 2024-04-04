@@ -1,21 +1,17 @@
 import {
-    Button,
     Center,
-    Fieldset,
     Group,
-    Modal,
     ScrollArea,
     Table,
     Text,
     TextInput,
-    Textarea,
     UnstyledButton,
     keys,
     rem
 } from "@mantine/core"
 import { useState } from "react"
 
-import { useDisclosure } from "@mantine/hooks"
+// import { useDisclosure } from "@mantine/hooks"
 import {
     IconChevronDown,
     IconChevronUp,
@@ -97,7 +93,7 @@ function sortData(
 }
 
 const PetInfo = ({ pet }: { pet: IPets }) => {
-    const [opened, { open, close }] = useDisclosure(false)
+    // const [opened, { open, close }] = useDisclosure(false)
 
     // const [value, setValue] = useState<Date | null>(null);
     const data = [
