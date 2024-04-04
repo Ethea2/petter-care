@@ -59,7 +59,7 @@ describe('Feature Retrieve Pet Records', () => {
         petRetrieveSpy = sinon.spy(petController, 'getPet');
         
         // Act
-        petController.getPet(req, res);
+        await petController.getPet(req, res);
 
         // Assert
         sinon.assert.calledOnce(petRetrieveStub);

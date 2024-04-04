@@ -45,7 +45,7 @@ export const getPet = async (req: Request, res: Response) => {
         return res.status(200).json({ message: "success", data: pet })
     } catch (e) {
         const result = e as Error
-        console.log(e);
+        console.log(e.message);
         return res.status(500).json({ message: result.message })
     }
 }
