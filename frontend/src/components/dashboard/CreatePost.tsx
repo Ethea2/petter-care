@@ -26,6 +26,7 @@ import { toast } from "react-toastify"
 const content = ""
 
 const CreatePost = () => {
+    const { user } = useAuth()
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -51,30 +52,44 @@ const CreatePost = () => {
             })
             return
         }
-        const postContent = editor.getHTML()
-        const res = await axios.post(
-            import.meta.env.VITE_DEFAULT_URL + "/api/post/",
-            {
-                content: postContent
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${user?.token}`
-                }
+        const postContent = editor.getHTML().toString()
+        console.log(postContent)
+        const res = await fetch(import.meta.env.VITE_DEFAULT_URL + "/api/post/upload", {
+            method: "POST",
+            body: JSON.stringify({title: "test", body: postContent}),
+            headers: {
+                
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${user?.token}`
             }
-        )       
-        if (res.status !== 200) {
+        })
+        // const res = await axios.post(
+        //     import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
+        //     {
+        //         title: "hello",
+        //         body: postContent
+        //     },
+        //     {
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //             Authorization: `Bearer ${user?.token}`
+        //         }
+        //     }
+        // )       
+        const json = await res.json()
+        if (!res.ok) {
             toast("Something went wrong", {
                 type: "error",
                 autoClose: 3000
             })
+            console.log(json)
             return
         }
         toast("Post added successfully!", {
             type: "success",
             autoClose: 3000
         })
+        console.log(json)
     }
 
     const setFile = () => {
