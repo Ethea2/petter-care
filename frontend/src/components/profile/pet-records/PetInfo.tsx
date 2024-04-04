@@ -159,37 +159,6 @@ const PetInfo = ({ pet }: { pet: IPets }) => {
                             onChange={handleSearchChange}
                         />
                     </div>
-
-                    <div className="w-2/12">
-                        <Modal
-                            opened={opened}
-                            onClose={close}
-                            title="Add a row"
-                            size="lg"
-                        >
-                            <Fieldset>
-                                <TextInput
-                                    className="mb-3"
-                                    label="Header"
-                                    placeholder="Enter header"
-                                />
-
-                                <Textarea
-                                    className="mb-3"
-                                    label="Information"
-                                    placeholder="Enter information"
-                                />
-                            </Fieldset>
-                        </Modal>
-
-                        <Button
-                            fullWidth
-                            className="justify-items-end"
-                            onClick={open}
-                        >
-                            Add a row
-                        </Button>
-                    </div>
                 </div>
 
                 <Table
