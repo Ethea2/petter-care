@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // constants
 const payload = { _id: 'fakeuserid' };
-const token = jwt.sign(payload, "stsweng", { expiresIn: "3w" });
+const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "3w" });
 
 // Models
 const modelPath = '../backend/src/models/';
@@ -51,7 +51,7 @@ describe('The user must be logged in to create a post', () =>{
             postStub = sinon.stub(postModel, 'addPost').yields(error);
             postControllerSpy = sinon.spy(postController, 'uploadPost');
             // Act
-            console.log("in test case")
+           
             await postController.uploadPost(req, res);
             // Assert
             sinon.assert.calledOnce(postControllerSpy);
@@ -64,7 +64,7 @@ describe('The user must be logged in to create a post', () =>{
             postStub = sinon.stub(postModel, 'addPostWithPicture').yields(error);
             postControllerSpy = sinon.spy(postController, 'uploadPost');
             // Act
-            console.log("in test case")
+          
             await postController.uploadPost(req, res);
             // Assert
             sinon.assert.calledOnce(postControllerSpy);
@@ -118,7 +118,6 @@ describe('The user must be logged in to create a post', () =>{
 
         it('should return status 200 and return the post object if it has an image attached', async () =>{
              // Arrange
-             console.log("hi po")
              const postData = {
                 title: "Mock Post Title tester",
                 body:  "Mock post body content",

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 // Constants
 const payload = { _id: 'fakeuserid' };
-const token = jwt.sign(payload, "stsweng", { expiresIn: "3w" });
+const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "3w" });
 
 // Models
 const modelPath = '../backend/src/models/';
