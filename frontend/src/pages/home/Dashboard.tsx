@@ -1,26 +1,23 @@
 import { Paper } from "@mantine/core"
-import Follow from "../../components/dashboard/Follow.tsx"
-import CreatePost from "../../components/dashboard/CreatePost.tsx"
-import Filter from "../../components/dashboard/Filter.tsx"
-import Post from "../../components/dashboard/Post.tsx"
 import { useEffect } from "react"
-import { useAuth } from "../../hooks/useAuth.tsx"
 import { useNavigate } from "react-router"
 import { toast } from "react-toastify"
+import CreatePost from "../../components/dashboard/CreatePost.tsx"
+import Filter from "../../components/dashboard/Filter.tsx"
+import Follow from "../../components/dashboard/Follow.tsx"
 
 const Dashboard = () => {
     const router = useNavigate()
-    const { user } = useAuth()
+
+    const user = JSON.parse(localStorage.getItem("user") as string)
     useEffect(() => {
-        setTimeout(() => {
-            if (!user) {
-                router("/sign-in")
-                toast("You must be signed in", {
-                    type: "warning",
-                    autoClose: 5000
-                })
-            }
-        }, 4000)
+        if (!user) {
+            router("/sign-in")
+            toast("You must be signed in", {
+                type: "warning",
+                autoClose: 5000
+            })
+        }
     }, [])
 
     return (

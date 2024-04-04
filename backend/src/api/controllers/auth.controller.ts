@@ -14,7 +14,10 @@ export const login = async (req: Request, res: Response) => {
         const user = await User.login(username, password)
         const token = createToken(user._id)
         return res.status(200).json({
-            token
+            token,
+            id: user._id,
+            username: user.username,
+            picture: user.picture
         })
     } catch (error) {
         const result = error as Error
