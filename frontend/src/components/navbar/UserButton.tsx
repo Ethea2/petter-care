@@ -3,9 +3,8 @@ import { IconChevronDown } from "@tabler/icons-react"
 import { Avatar, Text, UnstyledButton } from "@mantine/core"
 
 interface UserButtonProps extends React.ComponentPropsWithoutRef<"button"> {
-    image: string
-    name: string
-    username: string
+    image?: string
+    username?: string
     icon?: React.ReactNode
 }
 
@@ -19,16 +18,12 @@ const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
             {...others}
         >
             <div className="flex">
-                <div className="-mt-2 mr-5">
+                <div className=" mr-5">
                     <div className="flex">
                         <div>Hi,</div>
 
                         <div className="ml-1 font-semibold"> {name} </div>
                     </div>
-
-                    <Text className="-mt-2" c="dimmed" size="xs">
-                        @{username}
-                    </Text>
                 </div>
 
                 <Avatar src={image} radius="xl" />
