@@ -9,6 +9,7 @@ interface UserModel extends Model<IUser> {
     signup(username: string, password: string): IUser
     getUser(_id: string): IUser
     getAllUsers(): IUser[]
+    editUser(username: string, bio: string, _id: string): IUser
 }
 
 export const userSchema = new Schema<IUser, UserModel>(
@@ -203,6 +204,21 @@ userSchema.static("getAllUsers", async function getAllUsers() {
         throw Error("Could not fetch the users")
     }
 })
+
+userSchema.static(
+    "editUser",
+    async function editUser(username: string, bio: string, _id: string) {
+        try {
+            const user = await this.findOneAndUpdate({ _id }, { username, bio })
+            if (!user) {
+                throw Error("Update went wrong")
+            }
+            return user
+        } catch (error) {
+            throw Error("Could not fetch the users")
+        }
+    }
+)
 
 const User = model<IUser, UserModel>("User", userSchema)
 

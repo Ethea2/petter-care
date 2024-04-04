@@ -1,38 +1,95 @@
-import { useDisclosure } from '@mantine/hooks';
+import { useDisclosure } from "@mantine/hooks"
 import { rem, Menu, Modal, Button, TextInput, Textarea } from "@mantine/core"
 
-import {
-    IconLogout,
-    IconSettings,
-} from "@tabler/icons-react"
+import { IconLogout, IconSettings } from "@tabler/icons-react"
 
 import UserButton from "./UserButton"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { PiHouseFill, PiDogFill, PiCatFill } from "react-icons/pi"
+import { useEffect, useState } from "react"
+import { toast } from "react-toastify"
+import { IUser } from "../../types/userTypes"
 
 const Nav = () => {
-    const [opened, { open, close }] = useDisclosure(false);
+    const [opened, { open, close }] = useDisclosure(false)
+    const router = useNavigate()
+    const loggedUser = JSON.parse(localStorage.getItem("user") as string)
+    const [user, setUser] = useState<IUser>()
+    const [username, setUsername] = useState(loggedUser?.username)
+    const [bio, setBio] = useState("")
+    useEffect(() => {
+        if (!loggedUser) {
+            router("/sign-in")
+            toast("You must be signed in", {
+                type: "warning",
+                autoClose: 5000
+            })
+        }
+        const fetchUser = async () => {
+            const res = await fetch(
+                `${import.meta.env.VITE_DEFAULT_URL}/api/user/${loggedUser.id}`
+            )
+            if (!res.ok) {
+                toast("Something went wrong!", {
+                    type: "error",
+                    autoClose: 3000
+                })
+                return
+            }
+            const json = await res.json()
+            setUser(json)
+        }
+        fetchUser()
+    }, [])
+
+    const submitForm = async () => {
+        const res = await fetch(
+            `${import.meta.env.VITE_DEFAULT_URL}/api/user/edit/`,
+            {
+                method: "POST",
+                body: JSON.stringify({ username, bio }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${loggedUser.token}`
+                }
+            }
+        )
+        if (!res.ok) {
+            toast("Edit profile failed!", { type: "error", autoClose: 3000 })
+            return
+        }
+        window.location.reload()
+    }
 
     return (
-        <>  
-            <Modal opened={opened} onClose={close} title="Edit profile" centered>
+        <>
+            <Modal
+                opened={opened}
+                onClose={close}
+                title="Edit profile"
+                centered
+            >
                 <TextInput
-                    className='mb-3'
+                    className="mb-3"
                     label="User Name"
                     placeholder="Your username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
 
                 <Textarea
-                    className='mb-3'
+                    className="mb-3"
                     label="Bio"
                     placeholder="Your bio"
+                    value={bio}
+                    onChange={(e) => setBio(e.target.value)}
                 />
-
 
                 <div className="mt-4 flex justify-end">
                     <Button
                         className="rounded-2xl duration-300 ease-in-out"
                         color="primary-blue"
+                        onClick={submitForm}
                     >
                         Save
                     </Button>
@@ -51,33 +108,32 @@ const Nav = () => {
 
                 <div className="flex items-center space-x-6 text-3xl text-primary-blue mr-3">
                     <Link to="/dashboard">
-                        <PiHouseFill 
-                            className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out" />
+                        <PiHouseFill className="hover:brightness-75 cursor-pointer transition duration-400 ease-in-out" />
                     </Link>
 
-                    <Link to="/pet-access"
+                    <Link
+                        to="/pet-access"
                         className="flex hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
-                        >
+                    >
                         <PiDogFill />
                         <PiCatFill />
                     </Link>
-                    
 
                     <div className="flex items-center -mt-2">
                         <Menu trigger="hover" position="bottom-end">
                             <Menu.Target>
-                                <Link to="/user-profile">
+                                <Link to={`/user-profile/${user?._id}`}>
                                     <UserButton
                                         className="hover:brightness-75    "
-                                        image="/user-profile.svg"
-                                        name="Paula"
-                                        username="ennxxx"
+                                        image={user?.picture}
+                                        name={user?.username}
                                     />
                                 </Link>
                             </Menu.Target>
 
                             <Menu.Dropdown>
-                                <Menu.Item onClick={open}
+                                <Menu.Item
+                                    onClick={open}
                                     leftSection={
                                         <IconSettings
                                             style={{
@@ -89,7 +145,6 @@ const Nav = () => {
                                 >
                                     Edit Profile
                                 </Menu.Item>
-
 
                                 <Menu.Divider />
 

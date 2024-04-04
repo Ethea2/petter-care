@@ -13,7 +13,7 @@ const routes: Array<RouteType> = [
     { path: "/sign-in", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/dashboard", element: <Dashboard /> },
-    { path: "/user-profile", element: <UserProf /> },
+    { path: "/user-profile/:id", element: <UserProf /> },
     { path: "/pet-profile/:id", element: <PetProf /> },
     { path: "/pet-access", element: <PetAccess /> },
     { path: "/pet-create", element: <PetCreate /> },
