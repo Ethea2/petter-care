@@ -1,13 +1,11 @@
-import { Types } from "mongoose"
-
 export interface IPets {
-    _id?: Types.ObjectId | string
+    _id?: string
     name: string
     breed: string
     weight: Number
     birthday: string
-    medicalRecords: Array<IMedicalRecords | Object>
-    vetVisits: Array<IVetVisits | Object>
+    medicalRecords: Array<IMedicalRecords>
+    vetVisits: Array<IVetVisits>
     picture: string
     sex: string
     wants: Array<string>
@@ -16,7 +14,6 @@ export interface IPets {
     age: number
 }
 
-//temporary medical record field.
 export interface IMedicalRecords {
     doctor: string
     reason: string

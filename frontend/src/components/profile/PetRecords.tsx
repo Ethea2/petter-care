@@ -1,42 +1,39 @@
-import {
-    Paper,
-    Tabs
-} from "@mantine/core"
+import { Paper, Tabs } from "@mantine/core"
 
-import PetInfo from './pet-records/PetInfo'
-import PetMeds from './pet-records/PetMeds'
-import PetVet from './pet-records/PetVet'
+import PetInfo from "./pet-records/PetInfo"
+import PetMeds from "./pet-records/PetMeds"
+import PetVet from "./pet-records/PetVet"
+import { IPets } from "../../types/petTypes"
 
-const PetRecords = () => {
-
+const PetRecords = ({ pet }: { pet: IPets }) => {
     return (
-        <>  
+        <>
             <Paper className="p-9 w-full h-auto" shadow="lg" radius="lg">
-                <Tabs defaultValue='info'>
+                <Tabs defaultValue="info">
                     <Tabs.List className="mb-3">
-                        <Tabs.Tab value='info'>Information</Tabs.Tab>
-                        <Tabs.Tab value='meds'>Medications</Tabs.Tab>
-                        <Tabs.Tab value='vet'>Vet Visits</Tabs.Tab>
+                        <Tabs.Tab value="info">Information</Tabs.Tab>
+                        <Tabs.Tab value="meds">Medications</Tabs.Tab>
+                        <Tabs.Tab value="vet">Vet Visits</Tabs.Tab>
                     </Tabs.List>
 
                     <Tabs.Panel value="info">
-                        <PetInfo />
+                        <PetInfo pet={pet} />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="meds">
-                       <PetMeds />
+                        <PetMeds
+                            petMeds={pet.medicalRecords}
+                            pet_id={pet._id}
+                        />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="vet">
-                        <PetVet />
+                        <PetVet petVet={pet.vetVisits} pet_id={pet._id} />
                     </Tabs.Panel>
                 </Tabs>
-
-
-                
             </Paper>
         </>
     )
 }
 
-export default PetRecords;
+export default PetRecords

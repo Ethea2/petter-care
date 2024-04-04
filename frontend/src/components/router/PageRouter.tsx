@@ -6,7 +6,11 @@ const PageRouter = () => {
         <>
             <Routes>
                 {routes.map((route, index) => (
-                    <Route path={route.path} element={route.element} key={index} />
+                    <Route
+                        path={route.path}
+                        element={route.element}
+                        key={index}
+                    />
                 ))}
             </Routes>
         </>
