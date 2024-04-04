@@ -1,5 +1,5 @@
 import { Model, Schema, model, Types } from "mongoose"
-import { IMedicalRecords, IPets } from "../types/pet.types"
+import { IMedicalRecords, IPets, IVetVisits } from "../types/pet.types"
 import cloudinary from "../utils/cloudinary"
 import User from "./user.model"
 import { ObjectId } from "mongodb"
@@ -24,6 +24,22 @@ interface PetModel extends Model<IPets> {
     ): IPets
     getUserPets(id: string): Array<IPets>
     getPet(id: string): IPets
+    addMedications(
+        date: string,
+        doctor: string,
+        medication: string,
+        reason: string,
+        note: string,
+        pet_id: string
+    ): IMedicalRecords
+    getMedications(pet_id: string): Array<IMedicalRecords>
+    addVisits(
+        date: string,
+        location: string,
+        doctor: string,
+        reason: string,
+        pet_id: string
+    ): IVetVisits
 }
 
 export const petSchema = new Schema<IPets, PetModel>({
@@ -82,7 +98,7 @@ petSchema.static(
     async function addPetsWithPic(
         name: string,
         breed: string,
-        weight: number,
+        age: number,
         birthday: Date,
         picturePath: string,
         user_id: string
@@ -92,14 +108,15 @@ petSchema.static(
                 use_filename: true,
                 folder: "Petter-Care"
             })
+
             const pet = await this.create({
                 name,
                 breed,
-                weight,
+                age,
                 birthday,
                 picture: result.secure_url
             })
-            const user = await User.findById({ user_id })
+            const user = await User.findById(user_id)
             if (!user) {
                 throw Error("The user does not exist")
                 return
@@ -200,6 +217,80 @@ petSchema.static("getPet", async function getPet(id: string) {
         throw Error(result.message)
     }
 })
+
+petSchema.static(
+    "addMedications",
+    async function addMedications(
+        date: string,
+        doctor: string,
+        medication: string,
+        reason: string,
+        note: string,
+        pet_id: string
+    ) {
+        try {
+            const pet = await this.findById(pet_id)
+            if (!pet) {
+                throw Error("This pet does not exist")
+            }
+
+            const medicalRecord = pet.medicalRecords.push({
+                date: new Date(date),
+                reason,
+                note,
+                doctor
+            })
+            pet.save()
+
+            return pet.medicalRecords[medicalRecord - 1]
+        } catch (e) {
+            const result = e as Error
+            throw Error(result.message)
+        }
+    }
+)
+
+petSchema.static(
+    "getMedications",
+    async function getMedications(pet_id: string) {
+        try {
+            const pet = await this.findById(pet_id)
+            if (!pet) {
+                throw Error("This pet does not exist")
+            }
+            const medicalRecords = pet.medicalRecords
+
+            return medicalRecords
+        } catch (e) {
+            const result = e as Error
+            throw Error(result.message)
+        }
+    }
+)
+
+petSchema.static(
+    "addVisits",
+    async function addVisits(
+        date: string,
+        location: string,
+        doctor: string,
+        reason: string,
+        pet_id: string
+    ) {
+        try {
+            const pet = await this.findById(pet_id)
+            if (!pet) {
+                throw Error("this pet does not exist!")
+            }
+            const count = pet.vetVisits.push({ date, location, doctor, reason })
+            pet.save()
+            return pet.vetVisits[count - 1]
+        } catch (e) {
+            const result = e as Error
+            throw Error(result.message)
+        }
+    }
+)
 
 const Pet = model<IPets, PetModel>("Pet", petSchema)
 

@@ -21,11 +21,14 @@ const PetRecords = ({ pet }: { pet: IPets }) => {
                     </Tabs.Panel>
 
                     <Tabs.Panel value="meds">
-                        <PetMeds />
+                        <PetMeds
+                            petMeds={pet.medicalRecords}
+                            pet_id={pet._id}
+                        />
                     </Tabs.Panel>
 
                     <Tabs.Panel value="vet">
-                        <PetVet />
+                        <PetVet petVet={pet.vetVisits} pet_id={pet._id} />
                     </Tabs.Panel>
                 </Tabs>
             </Paper>

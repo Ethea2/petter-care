@@ -4,8 +4,8 @@ export interface IPets {
     breed: string
     weight: Number
     birthday: string
-    medicalRecords: string | IMedicalRecords | Object
-    vetVisits: string | IVetVisits | Object
+    medicalRecords: Array<IMedicalRecords>
+    vetVisits: Array<IVetVisits>
     picture: string
     sex: string
     wants: Array<string>
@@ -19,6 +19,7 @@ export interface IMedicalRecords {
     reason: string
     date: Date
     note: string
+    medication: string
 }
 
 export interface IVetVisits {

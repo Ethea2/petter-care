@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react"
 import {
-    Table,
-    ScrollArea,
-    UnstyledButton,
-    Group,
-    Text,
-    Center,
-    TextInput,
-    rem,
-    keys,
     Button,
-    Modal,
+    Center,
     Fieldset,
-    Textarea
+    Group,
+    Modal,
+    ScrollArea,
+    Table,
+    Text,
+    TextInput,
+    Textarea,
+    UnstyledButton,
+    keys,
+    rem
 } from "@mantine/core"
+import { useState } from "react"
 
 import { useDisclosure } from "@mantine/hooks"
 import {
-    IconSelector,
     IconChevronDown,
     IconChevronUp,
-    IconSearch
+    IconSearch,
+    IconSelector
 } from "@tabler/icons-react"
 import { IPets } from "../../../types/petTypes"
 
@@ -100,15 +100,13 @@ const PetInfo = ({ pet }: { pet: IPets }) => {
     const [opened, { open, close }] = useDisclosure(false)
 
     // const [value, setValue] = useState<Date | null>(null);
-    const [data, setData] = useState([
+    const data = [
         { variable: "Name", information: pet.name },
         { variable: "Birthday", information: pet.birthday },
         { variable: "Age", information: `${pet.age} y/o` },
         { variable: "Breed", information: pet.breed },
-        { variable: "Sex", information: pet.sex },
-        { variable: "Wants", information: pet.wants },
-        { variable: "Hates", information: pet.hates }
-    ])
+        { variable: "Sex", information: pet.sex }
+    ]
 
     const [search, setSearch] = useState("")
     const [sortedData, setSortedData] = useState(data)
@@ -134,8 +132,8 @@ const PetInfo = ({ pet }: { pet: IPets }) => {
         )
     }
 
-    const rows = sortedData.map((row) => (
-        <Table.Tr>
+    const rows = sortedData.map((row, key) => (
+        <Table.Tr key={key}>
             <Table.Td>{row.variable}</Table.Td>
             <Table.Td>{row.information}</Table.Td>
         </Table.Tr>
@@ -223,17 +221,20 @@ const PetInfo = ({ pet }: { pet: IPets }) => {
                     </Table.Tbody>
 
                     <Table.Tbody>
-                        {rows.length > 0 ? (
-                            rows
-                        ) : (
-                            <Table.Tr>
-                                <Table.Td colSpan={Object.keys(data[0]).length}>
-                                    <Text fw={500} ta="center">
-                                        Nothing found
-                                    </Text>
-                                </Table.Td>
-                            </Table.Tr>
-                        )}
+                        {pet &&
+                            (rows.length > 0 ? (
+                                rows
+                            ) : (
+                                <Table.Tr>
+                                    <Table.Td
+                                        colSpan={Object.keys(data[0]).length}
+                                    >
+                                        <Text fw={500} ta="center">
+                                            Nothing found
+                                        </Text>
+                                    </Table.Td>
+                                </Table.Tr>
+                            ))}
                     </Table.Tbody>
                 </Table>
             </ScrollArea>

@@ -1,18 +1,15 @@
 import SignInForm from "../../components/sign-in/SignInForm.tsx"
 import SignInAnimation from "../../components/sign-in/SignInAnimation.tsx"
 import { useNavigate } from "react-router"
-import { useAuth } from "../../hooks/useAuth.tsx"
 import { useEffect } from "react"
 
 const Login = () => {
     const router = useNavigate()
-    const { user } = useAuth()
+    const user = JSON.parse(localStorage.getItem("user") as string)
     useEffect(() => {
-        setTimeout(() => {
-            if (user) {
-                router("/")
-            }
-        }, 4000)
+        if (user) {
+            router("/")
+        }
     }, [])
     return (
         <>

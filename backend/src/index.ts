@@ -8,6 +8,8 @@ import bcrypt from "bcrypt"
 import postRouter from "./api/routes/post.routes"
 import morgan from "morgan"
 import petRoutes from "./api/routes/pet.routes"
+import fileUpload from "express-fileupload"
+import Pet from "./models/pet.model"
 
 dotenv.config()
 
@@ -26,7 +28,11 @@ var corsOptions = function (req: Request, res: Response, next: NextFunction) {
 }
 
 app.use(corsOptions)
-
+app.use(
+    fileUpload({
+        useTempFiles: true
+    })
+)
 app.use(express.json())
 app.use(morgan("dev"))
 

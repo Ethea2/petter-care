@@ -1,20 +1,19 @@
 import {
-    TextInput,
-    Paper,
-    Title,
+    ActionIcon,
+    Button,
+    FileButton,
+    Group,
     NativeSelect,
     NumberInput,
-    FileButton,
-    ActionIcon,
-    Group,
-    Button
+    Paper,
+    TextInput,
+    Title
 } from "@mantine/core"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
-import axios from "axios"
 
+import axios from "axios"
 import { Link } from "react-router-dom"
-import { useAuth } from "../../hooks/useAuth"
 
 const CreatePet = () => {
     const [image, setImage] = useState<File | null>()
@@ -24,7 +23,7 @@ const CreatePet = () => {
     const [age, setAge] = useState<number | string>()
     const [sex, setSex] = useState("Male")
     const [breed, setBreed] = useState("")
-    const { user } = useAuth()
+    const user = JSON.parse(localStorage.getItem("user") as string)
 
     useEffect(() => {
         if (image) {
@@ -48,21 +47,52 @@ const CreatePet = () => {
     }
 
     const upload = async () => {
-        console.log(user?.token)
-        const res = await fetch(
-            import.meta.env.VITE_DEFAULT_URL + "/api/pet/",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    breed,
-                    sex,
-                    age,
-                    name,
-                    bday
-                }),
+        if (!image) {
+            const res = await fetch(
+                import.meta.env.VITE_DEFAULT_URL + "/api/pet/",
+                {
+                    method: "POST",
+                    body: JSON.stringify({
+                        breed,
+                        sex,
+                        age,
+                        name,
+                        bday
+                    }),
 
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${user?.token}`
+                    }
+                }
+            )
+            if (!res.ok) {
+                toast("Something went wrong", {
+                    type: "error",
+                    autoClose: 3000
+                })
+                return
+            }
+            toast("Pet added successfully!", {
+                type: "success",
+                autoClose: 3000
+            })
+            return
+        }
+
+        const res = await axios.post(
+            `${import.meta.env.VITE_DEFAULT_URL}/api/pet/upload`,
+            {
+                img: image,
+                breed,
+                sex,
+                age,
+                name,
+                bday
+            },
+            {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${user?.token}`
                 }
             }
@@ -74,10 +104,12 @@ const CreatePet = () => {
             })
             return
         }
+        console.log(res)
         toast("Pet added successfully!", {
             type: "success",
             autoClose: 3000
         })
+        return
     }
 
     const submit = async () => {
