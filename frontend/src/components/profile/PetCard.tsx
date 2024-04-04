@@ -36,7 +36,7 @@ const PetCard = ({ pet }: { pet: IPets }) => {
                 <div className="flex justify-center items-center pt-10 pb-5">
                     <div className="flex justify-center items-center h-24 w-24 rounded-full drop-shadow">
                         <img
-                            src="/default-pet.svg"
+                            src={pet.picture}
                             className="rounded-full h-full w-full object-cover"
                         />
                     </div>
