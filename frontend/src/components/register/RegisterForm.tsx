@@ -20,6 +20,11 @@ const RegisterForm = () => {
     const [email, setEmail] = useState<string>()
     const { register } = useRegister()
 
+    const testString = (string: string) => {
+        const regex = /^[a-zA-Z0-9]+$/
+        return regex.test(string)
+    }
+
     const submit = async () => {
         if (!email || !username || !password || !confirm) {
             return toast("Please complete all the necessary fields!", {
@@ -36,6 +41,17 @@ const RegisterForm = () => {
                 closeOnClick: true,
                 type: "error"
             })
+        }
+        if (!testString(password)) {
+            return toast(
+                "Please don't include special characters in the password!",
+                {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    type: "error"
+                }
+            )
         }
         await register(username, password)
     }
@@ -62,7 +78,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setUsername(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <TextInput
@@ -74,7 +90,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setEmail(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -86,7 +102,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setPassowrd(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -98,7 +114,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setConfirm(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
                 <Group justify="end" mt="lg">
                     <Checkbox />

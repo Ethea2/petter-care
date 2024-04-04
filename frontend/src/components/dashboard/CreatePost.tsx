@@ -62,45 +62,61 @@ const CreatePost = () => {
             return
         }
         const postContent = editor.getHTML().toString()
-        console.log(postContent)
-        const res = await fetch(
-            import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
+        if (!imageName) {
+            const res = await fetch(
+                import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
+                {
+                    method: "POST",
+                    body: JSON.stringify({ title: "test", body: postContent }),
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${user?.token}`
+                    }
+                }
+            )
+            const json = await res.json()
+            if (!res.ok) {
+                toast("Something went wrong", {
+                    type: "error",
+                    autoClose: 3000
+                })
+                console.log(json)
+                return
+            }
+            toast("Post added successfully!", {
+                type: "success",
+                autoClose: 3000
+            })
+            window.location.reload()
+            return
+        }
+        const res = await axios.post(
+            `${import.meta.env.VITE_DEFAULT_URL}/api/post/upload`,
             {
-                method: "POST",
-                body: JSON.stringify({ title: "test", body: postContent }),
+                body: postContent,
+                img: image
+            },
+            {
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                     Authorization: `Bearer ${user?.token}`
                 }
             }
         )
-        // const res = await axios.post(
-        //     import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
-        //     {
-        //         title: "hello",
-        //         body: postContent
-        //     },
-        //     {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             Authorization: `Bearer ${user?.token}`
-        //         }
-        //     }
-        // )
-        const json = await res.json()
-        if (!res.ok) {
+        if (res.status !== 200) {
             toast("Something went wrong", {
                 type: "error",
                 autoClose: 3000
             })
-            console.log(json)
             return
         }
+        console.log(res)
         toast("Post added successfully!", {
             type: "success",
             autoClose: 3000
         })
         window.location.reload()
+        return
     }
 
     return (

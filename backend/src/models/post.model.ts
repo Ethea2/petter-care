@@ -22,6 +22,9 @@ export interface ResolvedPosts {
 interface PostModel extends Model<IPost> {
     createPost(_id: string, body: string, picturePath?: string): Promise<IPost>
     getAllPosts(): Array<ResolvedPosts>
+    getAllUserPosts(id: string): Array<ResolvedPosts>
+    getSinglePost(id: string): ResolvedPosts
+    deletePost(id: string): IPost
 }
 
 export const postSchema = new Schema<IPost, PostModel>({
@@ -107,6 +110,84 @@ postSchema.static("getAllPosts", async function getAllPosts() {
         })
         const finalPosts = Promise.all(resolvePosts)
         return finalPosts
+    } catch (e) {
+        const result = e as Error
+        throw Error(result.message)
+    }
+})
+
+postSchema.static(
+    "getAllUserPosts",
+    async function getAllUserPosts(id: string) {
+        try {
+            const user = await User.findById(id)
+            if (!user) {
+                throw Error("The user does not exist")
+                return
+            }
+            const posts = await this.find({
+                _id: {
+                    $in: user.posts
+                }
+            })
+            const resolvePosts = posts.map((post) => {
+                return {
+                    posts: post,
+                    user: {
+                        _id: user._id,
+                        username: user.username,
+                        picture: user.picture
+                    }
+                }
+            })
+
+            return resolvePosts
+        } catch (e) {
+            const result = e as Error
+            throw Error(result.message)
+        }
+    }
+)
+
+postSchema.static("getSinglePost", async function getSinglePost(id: string) {
+    try {
+        const post = await this.findById(id)
+        if (!post) {
+            throw Error("This post does not exist!")
+        }
+        const user = await User.findById(post?.poster)
+        if (!user) {
+            throw Error("This user does not exist")
+        }
+        return {
+            posts: post,
+            user: {
+                username: user.username,
+                picture: user.picture,
+                _id: user._id
+            }
+        }
+    } catch (e) {
+        const result = e as Error
+        throw Error(result.message)
+    }
+})
+
+postSchema.static("deletePost", async function deletePost(id: string) {
+    try {
+        const post = await this.findById(id)
+        if (!post) {
+            throw Error("Post does not exist")
+        }
+        const user = await User.findById(post.poster)
+        if (!user) {
+            throw Error("This user does not exist")
+        }
+        const newPosts = user.posts.filter((item) => item !== post._id)
+
+        user.posts = newPosts
+        const deletedPost = await this.findOneAndDelete({ _id: id })
+        return deletedPost
     } catch (e) {
         const result = e as Error
         throw Error(result.message)

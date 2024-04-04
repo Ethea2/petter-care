@@ -9,6 +9,7 @@ import { PiHouseFill, PiDogFill, PiCatFill } from "react-icons/pi"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { IUser } from "../../types/userTypes"
+import { useAuth } from "../../hooks/useAuth"
 
 const Nav = () => {
     const [opened, { open, close }] = useDisclosure(false)
@@ -17,6 +18,7 @@ const Nav = () => {
     const [user, setUser] = useState<IUser>()
     const [username, setUsername] = useState(loggedUser?.username)
     const [bio, setBio] = useState("")
+    const { dispatch } = useAuth()
     useEffect(() => {
         if (!loggedUser) {
             router("/sign-in")
@@ -42,6 +44,10 @@ const Nav = () => {
         fetchUser()
     }, [])
 
+    const logout = async () => {
+        localStorage.removeItem("user")
+        router("/sign-in")
+    }
     const submitForm = async () => {
         const res = await fetch(
             `${import.meta.env.VITE_DEFAULT_URL}/api/user/edit/`,
@@ -158,6 +164,7 @@ const Nav = () => {
                                             }}
                                         />
                                     }
+                                    onClick={logout}
                                 >
                                     Logout
                                 </Menu.Item>

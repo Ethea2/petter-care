@@ -5,6 +5,7 @@ export interface IPost {
     image?: string
     comments: string[]
     poster: string
+    _id: string
 }
 
 export interface ResolvedPosts {
