@@ -20,6 +20,11 @@ const RegisterForm = () => {
     const [email, setEmail] = useState<string>()
     const { register } = useRegister()
 
+    const testString = (string: string) => {
+        const regex = /^[a-zA-Z0-9]+$/
+        return regex.test(string)
+    }
+
     const submit = async () => {
         if (!email || !username || !password || !confirm) {
             return toast("Please complete all the necessary fields!", {
@@ -37,24 +42,35 @@ const RegisterForm = () => {
                 type: "error"
             })
         }
+        if (!testString(password)) {
+            return toast(
+                "Please don't include special characters in the password!",
+                {
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    type: "error"
+                }
+            )
+        }
         await register(username, password)
     }
 
     return (
         <>
-            <Paper className="p-20 w-full" shadow="lg" radius="lg">
+            <Paper className="px-20 py-10 w-100" shadow="lg" radius="lg">
                 <img
-                    className="mx-auto pr-4 mb-6 w-2/2 hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
+                    className="mx-auto pr-4 mb-8 w-[70%] hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
                     src="/logo.svg"
                     alt="Logo"
                 />
 
-                <Title className="-m-1 text-3xl" ta="center">
+                <Title className="text-3xl" ta="center">
                     Register your account
                 </Title>
 
                 <TextInput
-                    className="mt-11"
+                    className="mt-8"
                     variant="filled"
                     label="User Name"
                     placeholder="Your username"
@@ -62,7 +78,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setUsername(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <TextInput
@@ -74,7 +90,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setEmail(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -86,7 +102,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setPassowrd(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
 
                 <PasswordInput
@@ -98,7 +114,7 @@ const RegisterForm = () => {
                     required
                     error=""
                     onChange={(e) => setConfirm(e.target.value)}
-                // TODO: Put error message here
+                    // TODO: Put error message here
                 />
                 <Group justify="end" mt="lg">
                     <Checkbox />

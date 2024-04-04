@@ -17,7 +17,7 @@ const routes: Array<RouteType> = [
     { path: "/pet-profile/:id", element: <PetProf /> },
     { path: "/pet-access", element: <PetAccess /> },
     { path: "/pet-create", element: <PetCreate /> },
-    { path: "/post", element: <Post /> }
+    { path: "/post/:id", element: <Post /> }
 ]
 
 export default routes
