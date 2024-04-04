@@ -171,7 +171,7 @@ describe('Input Validation for Login Auth Controller', () => {
                 }
             };
         });
-        // TODO: fix this
+        s
         it('Should return jwt token and status 200', async () =>{
 
             // Arrange
@@ -193,7 +193,7 @@ describe('Input Validation for Login Auth Controller', () => {
 
 // Test Case 2: Hashed Password
 describe('Password Hashing',  () => {
-    // TODO: revise script in sheet
+    
     let res, req, signupStub, authSignupSpy, authSignupStub, createStub;
     const mockUser = {
         username: 'testusername',
@@ -491,11 +491,3 @@ describe('Input Validation for Register', () =>{
         
     });
 });
-// Test Case 4: Verify Session management
-// TODO: Fill up code
-describe('JWT Token testing', () => {
-    // let res, req, tokenStub;
-    
-});
-// Test Case 5: Remember Me
-// TODO: Fill up code
