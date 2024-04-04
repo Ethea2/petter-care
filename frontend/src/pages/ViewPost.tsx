@@ -1,10 +1,9 @@
-import ProfileCard from "../components/profile/ProfileCard.tsx"
-import Post from "../components/dashboard/Post.tsx"
-import CommentBox from "../components/dashboard/CommentBox.tsx"
-import { useParams } from "react-router"
 import { useEffect, useState } from "react"
-import { ResolvedPosts } from "../types/postTypes.tsx"
+import { useParams } from "react-router"
 import { toast } from "react-toastify"
+import CommentBox from "../components/dashboard/CommentBox.tsx"
+import Post from "../components/dashboard/Post.tsx"
+import { ResolvedPosts } from "../types/postTypes.tsx"
 
 const UserProf = () => {
     const { id } = useParams()

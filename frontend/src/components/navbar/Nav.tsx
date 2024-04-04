@@ -1,15 +1,14 @@
+import { Button, Menu, Modal, TextInput, Textarea, rem } from "@mantine/core"
 import { useDisclosure } from "@mantine/hooks"
-import { rem, Menu, Modal, Button, TextInput, Textarea } from "@mantine/core"
 
 import { IconLogout, IconSettings } from "@tabler/icons-react"
 
-import UserButton from "./UserButton"
-import { Link, useNavigate } from "react-router-dom"
-import { PiHouseFill, PiDogFill, PiCatFill } from "react-icons/pi"
 import { useEffect, useState } from "react"
+import { PiCatFill, PiDogFill, PiHouseFill } from "react-icons/pi"
+import { Link, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { IUser } from "../../types/userTypes"
-import { useAuth } from "../../hooks/useAuth"
+import UserButton from "./UserButton"
 
 const Nav = () => {
     const [opened, { open, close }] = useDisclosure(false)
@@ -18,7 +17,6 @@ const Nav = () => {
     const [user, setUser] = useState<IUser>()
     const [username, setUsername] = useState(loggedUser?.username)
     const [bio, setBio] = useState("")
-    const { dispatch } = useAuth()
     useEffect(() => {
         if (!loggedUser) {
             router("/sign-in")
