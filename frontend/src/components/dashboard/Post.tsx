@@ -1,10 +1,9 @@
 import { Paper } from "@mantine/core"
-import { useState } from "react"
 import { PiChatTextBold } from "react-icons/pi"
 
 import { Link } from "react-router-dom"
-import { ResolvedPosts } from "../../types/postTypes"
 import { toast } from "react-toastify"
+import { ResolvedPosts } from "../../types/postTypes.tsx"
 
 const Post = ({ post }: { post: ResolvedPosts }) => {
     const loggedUser = JSON.parse(localStorage.getItem("user") as string)
