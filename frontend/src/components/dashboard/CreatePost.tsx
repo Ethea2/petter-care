@@ -20,13 +20,23 @@ import { PiImageBold } from "react-icons/pi"
 import axios from "axios"
 import { useAuth } from "../../hooks/useAuth"
 import { toast } from "react-toastify"
+import { useEffect, useState } from "react"
 //import { uploadPost } from '../../controllers/post.controller'
-
 
 const content = ""
 
 const CreatePost = () => {
     const { user } = useAuth()
+    const [image, setImage] = useState<File | null>()
+    const [imageName, setImageName] = useState<string>("")
+    useEffect(() => {
+        if (image) {
+            const objectUrl = URL.createObjectURL(image)
+            setImageName(objectUrl)
+        } else {
+            setImageName("")
+        }
+    }, [image])
     const editor = useEditor({
         extensions: [
             StarterKit,
@@ -43,7 +53,6 @@ const CreatePost = () => {
         content
     })
 
-    
     const uploadPost = async () => {
         if (!editor) {
             toast("Post Box not initialized", {
@@ -54,15 +63,17 @@ const CreatePost = () => {
         }
         const postContent = editor.getHTML().toString()
         console.log(postContent)
-        const res = await fetch(import.meta.env.VITE_DEFAULT_URL + "/api/post/upload", {
-            method: "POST",
-            body: JSON.stringify({title: "test", body: postContent}),
-            headers: {
-                
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?.token}`
+        const res = await fetch(
+            import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
+            {
+                method: "POST",
+                body: JSON.stringify({ title: "test", body: postContent }),
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user?.token}`
+                }
             }
-        })
+        )
         // const res = await axios.post(
         //     import.meta.env.VITE_DEFAULT_URL + "/api/post/upload",
         //     {
@@ -75,7 +86,7 @@ const CreatePost = () => {
         //             Authorization: `Bearer ${user?.token}`
         //         }
         //     }
-        // )       
+        // )
         const json = await res.json()
         if (!res.ok) {
             toast("Something went wrong", {
@@ -89,11 +100,7 @@ const CreatePost = () => {
             type: "success",
             autoClose: 3000
         })
-        console.log(json)
-    }
-
-    const setFile = () => {
-        return null
+        window.location.reload()
     }
 
     return (
@@ -188,30 +195,37 @@ const CreatePost = () => {
 
                     <div className="flex flex-row text-primary-blue justify-between items-end">
                         <div className="-mb-1">
-                            <FileButton
-                                accept="image/png,image/jpeg"
-                                onChange={setFile}
-                            >
-                                {(props) => (
-                                    <ActionIcon
-                                        {...props}
-                                        radius="xl"
-                                        size="xl"
-                                    >
-                                        <PiImageBold size={20} />
-                                    </ActionIcon>
-                                )}
-                            </FileButton>
+                            {imageName ? (
+                                <img
+                                    src={imageName}
+                                    className="object-cover rounded-lg w-[10%] h-[10%]"
+                                />
+                            ) : (
+                                <FileButton
+                                    accept="image/png,image/jpeg"
+                                    onChange={setImage}
+                                >
+                                    {(props) => (
+                                        <ActionIcon
+                                            {...props}
+                                            radius="xl"
+                                            size="xl"
+                                        >
+                                            <PiImageBold size={20} />
+                                        </ActionIcon>
+                                    )}
+                                </FileButton>
+                            )}
                         </div>
-
-                        <Button className="rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out"
-                        onClick={uploadPost}>
+                        <Button
+                            className="rounded-2xl hover:bg-black mt-4 duration-300 ease-in-out"
+                            onClick={uploadPost}
+                        >
                             Post
                         </Button>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
