@@ -39,10 +39,13 @@ export const getUserPets = async (req: Request, res: Response) => {
 export const getPet = async (req: Request, res: Response) => {
     try {
         const { id } = req.params
+        console.log("TRIALLLLLLL");
         const pet = await Pet.getPet(id)
+        console.log("Trial");
         return res.status(200).json({ message: "success", data: pet })
     } catch (e) {
         const result = e as Error
+        console.log(e);
         return res.status(500).json({ message: result.message })
     }
 }

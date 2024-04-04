@@ -181,6 +181,9 @@ describe('Input Validation for Login Auth Controller', () => {
             // Act
             await authController.login(req, res);
 
+            console.log("jwt status is ");
+            console.log(res.status);
+
             // Assert
             sinon.assert.calledOnce(loginStub);
             sinon.assert.calledOnce(authLoginSpy);
