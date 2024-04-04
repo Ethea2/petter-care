@@ -171,7 +171,7 @@ describe('Input Validation for Login Auth Controller', () => {
                 }
             };
         });
-        s
+        
         it('Should return jwt token and status 200', async () =>{
 
             // Arrange
