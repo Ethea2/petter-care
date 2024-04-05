@@ -1,37 +1,9 @@
 import { useDisclosure } from "@mantine/hooks"
-import { PiNotePencilBold } from "react-icons/pi"
-import { Button, Modal, TextInput, Textarea } from "@mantine/core"
 import { IPets } from "../../types/petTypes"
 
 const PetCard = ({ pet }: { pet: IPets }) => {
-    const [opened, { open, close }] = useDisclosure(false)
-
     return (
         <>
-            <Modal
-                opened={opened}
-                onClose={close}
-                title="Edit profile"
-                centered
-            >
-                <TextInput
-                    className="mb-3"
-                    label="User Name"
-                    placeholder="Your username"
-                />
-
-                <Textarea className="mb-3" label="Bio" placeholder="Your bio" />
-
-                <div className="mt-4 flex justify-end">
-                    <Button
-                        className="rounded-2xl duration-300 ease-in-out"
-                        color="primary-blue"
-                    >
-                        Save
-                    </Button>
-                </div>
-            </Modal>
-
             <div className="w-[100%] h-auto bg-dirty-white rounded-2xl mb-6 shadow-md justify-center">
                 <div className="flex justify-center items-center pt-10 pb-5">
                     <div className="flex justify-center items-center h-24 w-24 rounded-full drop-shadow">
