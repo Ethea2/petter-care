@@ -24,7 +24,7 @@ const Comments = () => {
                             <p className="pl-1 text-xs text-grey">@puggleshooba</p>
                         </div>
                         <div>
-                            <p className="mt-1 text-lg text-black">pendulum dick sucking.</p>
+                            <p className="mt-1 text-lg text-black">This is a comment.</p>
                         </div>
                         <div className="flex items-center mt-4">
                             <button
