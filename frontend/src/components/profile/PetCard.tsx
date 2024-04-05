@@ -57,18 +57,6 @@ const PetCard = ({ pet }: { pet: IPets }) => {
                 </div>
 
                 {/* TODO: Add hover effect */}
-                <div
-                    className="border-t border-input-grey text-base  hover:brightness-75 cursor-pointer transition duration-400 ease-in-out"
-                    onClick={open}
-                >
-                    <div className="w-full p-4 border-input-grey rounded-bl-2xl">
-                        <div className="flex flex-col justify-center items-center">
-                            <a className="text-3xl text-black pb-2" href="/">
-                                <PiNotePencilBold />
-                            </a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </>
     )
