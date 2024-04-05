@@ -1,4 +1,3 @@
-import { useDisclosure } from "@mantine/hooks"
 import { IPets } from "../../types/petTypes"
 
 const PetCard = ({ pet }: { pet: IPets }) => {
