@@ -25,7 +25,7 @@ const CreatePet = () => {
     const [breed, setBreed] = useState("")
     const user = JSON.parse(localStorage.getItem("user") as string)
 
-    useEffect(() => console.log(sex), [sex])
+    // useEffect(() => console.log(sex), [sex])
 
     useEffect(() => {
         if (image) {
