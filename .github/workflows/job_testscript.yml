@@ -19,11 +19,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm test
+      - name: Install dependencies in frontend
+        run: npm install
+        working-directory: ./frontend
 
-      - name: Save test results
+      - name: Install dependencies in backend
+        run: npm install
+        working-directory: ./backend
+
+      - name: Run tests and capture output
+        run: npm test 2>&1 | tee test_results.txt | tr -d '\r'
+     
+      - name: Upload test results
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: tests
+          name: test_results
+          path: test_results.txt
+          if: always()  # Upload even on failure
